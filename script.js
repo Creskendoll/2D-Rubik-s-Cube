@@ -1,5 +1,6 @@
 var surface;
 var selector;
+var eventController = new EventController();
 var gameSize = 3;
 
 var movement;
@@ -33,8 +34,7 @@ var Rubics = {
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
 
         document.addEventListener('keydown', function (event) {
-            eventControl(event);
-
+            eventController.handleKeyEvent(event);
         });
     },
     clear : function() {
@@ -84,174 +84,4 @@ function Grid(color, xPos, yPos) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.color = color;
-}
-
-
-//selector circle
-function Selector() {
-    this.xPos = canvasSize/(gameSize*2);
-    this.yPos = canvasSize/(gameSize*2);
-    var halfDistance = canvasSize/(gameSize*2);
-    this.radius = 15;
-    this.color = "yellow";
-    this.indexX = 0;
-    this.indexY = 0;
-
-    this.outOfMap = false;
-
-    this.xPosArr = [];
-    this.xPosArr[0] = halfDistance;
-    this.yPosArr = [];
-    this.yPosArr[0] = halfDistance;
-
-    for(var i = 1; i < gameSize+1; i++){
-        this.xPosArr[i] = this.xPosArr[i-1] + 2*halfDistance;
-        this.yPosArr[i] = this.yPosArr[i-1] + 2*halfDistance;
-    }
-
-    Rubics.context.fillStyle = this.color;
-    Rubics.context.beginPath();
-    Rubics.context.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
-    Rubics.context.fill();
-
-    this.move = function(direction, destination){
-        Rubics.clear();
-        Rubics.update();
-
-        switch (direction){
-            //left
-            case 37:
-                this.xPos -= 2;
-                gameContext.fillStyle = this.color;
-                gameContext.beginPath();
-                gameContext.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
-                gameContext.fill();
-                //if required destination is met
-                if(this.outOfMap){
-                    if(this.xPos < 0 ){
-                        this.xPos = canvasSize;
-                        this.outOfMap = false;
-                    }
-                }else{
-                    if(this.xPos <= destination){
-                        clearInterval(movement);
-                        movement = false;
-                    }
-                }
-                break;
-            //up
-            case 38:
-                this.yPos -= 2;
-                gameContext.fillStyle = this.color;
-                gameContext.beginPath();
-                gameContext.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
-                gameContext.fill();
-
-                if(this.outOfMap){
-                    if(this.yPos < 0 ){
-                        this.yPos = canvasSize;
-                        this.outOfMap = false;
-                    }
-                }else{
-                    if(this.yPos <= destination){
-                        clearInterval(movement);
-                        movement = false;
-                    }
-                }
-                break;
-            //right
-            case 39:
-                this.xPos += 2;
-                gameContext.fillStyle = this.color;
-                gameContext.beginPath();
-                gameContext.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
-                gameContext.fill();
-
-                if(this.outOfMap){
-                    if(this.xPos > canvasSize){
-                        this.xPos = 0;
-                        this.outOfMap = false;
-                    }
-                }else{
-                    if(this.xPos >= destination){
-                        clearInterval(movement);
-                        movement = false;
-                    }
-                }
-                break;
-            //down
-            case 40:
-                this.yPos += 2;
-                gameContext.fillStyle = this.color;
-                gameContext.beginPath();
-                gameContext.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
-                gameContext.fill();
-
-                if(this.outOfMap){
-                    if(this.yPos > canvasSize){
-                        this.yPos = 0;
-                        this.outOfMap = false;
-                    }
-                }else{
-                    if(this.yPos >= destination){
-                        clearInterval(movement);
-                        movement = false;
-                    }
-                }
-                break;
-        }
-    }
-}
-
-function eventControl(event) {
-    if(event.keyCode >= 37 && event.keyCode <= 40){
-        if(!movement){
-            switch (event.keyCode){
-                //left
-                case 37:
-                    selector.indexX--;
-                    if(selector.indexX < 0){
-                        selector.indexX = gameSize-1;
-                        selector.outOfMap = true;
-                        //movement = setInterval(function(){selector.move(event.keyCode, -selector.radius)}, 0.1);
-                    }
-                    movement = setInterval(function(){
-                        selector.move(event.keyCode, selector.xPosArr[selector.indexX])}, 0.1);
-                    break;
-                //up
-                case 38:
-                    selector.indexY = selector.indexY-1;
-                    if(selector.indexY < 0){
-                        selector.indexY = gameSize-1;
-                        selector.outOfMap = true;
-                        //movement = setInterval(function(){selector.move(event.keyCode, -selector.radius)}, 0.1);
-                    }
-                    movement = setInterval(function(){
-                        selector.move(event.keyCode, selector.yPosArr[selector.indexY])}, 0.1);
-                    break;
-                //right
-                case 39:
-                    selector.indexX = selector.indexX+1;
-                    if(selector.indexX > gameSize-1){
-                        selector.indexX = 0;
-                        selector.outOfMap = true;
-                        //movement = setInterval(function(){selector.move(event.keyCode, canvasSize+selector.radius)}, 0.1);
-                    }
-                    movement = setInterval(function(){
-                        selector.move(event.keyCode, selector.xPosArr[selector.indexX])}, 0.1);
-                    break;
-                //down
-                case 40:
-                    selector.indexY = selector.indexY+1;
-                    if(selector.indexY > gameSize-1){
-                        selector.indexY = 0;
-                        selector.outOfMap = true;
-                        //movement = setInterval(function(){selector.move(event.keyCode, canvasSize+selector.radius)}, 0.1);
-                    }
-                    movement = setInterval(function(){
-                        selector.move(event.keyCode, selector.yPosArr[selector.indexY])}, 0.1);
-                    break;
-            }
-        }
-    }
 }
