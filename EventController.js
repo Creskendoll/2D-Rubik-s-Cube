@@ -3,7 +3,7 @@
  */
 function EventController() {
     this.handleKeyEvent = function(event){
-        //alert(event.keyCode);
+        //console.log(event);
         //if arrow keys are pressed
         if(event.keyCode >= 37 && event.keyCode <= 40){
             if(!movement){
@@ -55,6 +55,30 @@ function EventController() {
                 }
             }
         }else{
+
+            switch (event.key){
+                case "w":
+                    var horizLine = surface[selector.indexX];
+                    surface[0] = horizLine[gameSize-1];
+                    for(var i = 1; i < gameSize; i++){
+                        surface[i] = horizLine[i-1];
+                    }
+                    Rubics.update();
+                    break;
+                case "s":
+                    break;
+                case "a":
+                    var verticLine = new Array(gameSize);
+                    verticLine = surface[selector.indexY];
+                    surface[0] = verticLine[gameSize-1];
+                    for(var j = 1; j < gameSize; j++){
+                        surface[j] = verticLine[j-1];
+                    }
+                    Rubics.update();
+                    break;
+                case "d":
+                    break;
+            }
 
         }
     }

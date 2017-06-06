@@ -114,5 +114,7 @@ function Selector() {
                 }
                 break;
         }
+
+        console.log("Selector X: " + this.indexX, "Selector Y: " + this.indexY);
     }
 }

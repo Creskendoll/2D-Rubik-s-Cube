@@ -1,9 +1,9 @@
 var surface;
 var selector;
-var eventController = new EventController();
-var gameSize = 3;
-
 var movement;
+var eventController = new EventController(movement);
+
+var gameSize = 3;
 
 var canvasSize = 630;
 
