@@ -2,24 +2,26 @@ var surface;
 var selector;
 var gameSize = 3;
 
+var movement;
+
 var canvasSize = 630;
 
 var gameContext;
 function startGame() {
-
     Rubics.start();
     gameContext = Rubics.context;
 
+    //initialize an empty array for our surface
     surface = new Array(gameSize);
     for(var i = 0; i < gameSize; i++){
         surface[i] = new Array(gameSize);
     }
 
-    surface = fillSurface(surface, gameSize);
+    surface = fillSurface(surface);
 
     Rubics.update();
 
-    selector = new Selector(gameSize);
+    selector = new Selector();
 }
 
 var Rubics = {
@@ -49,17 +51,17 @@ var Rubics = {
     }
 };
 
-function fillSurface(arr, gameSize) {
+function fillSurface(arr) {
     var count = 0;
     var gridSize = canvasSize/gameSize;
     for(var i = 0; i < gameSize; i++){
         for(var j = 0; j < gameSize; j++){
             if(count < gameSize){
-                arr[i][j] = new Grid(gameSize, "red", gridSize*i,gridSize*j);
+                arr[i][j] = new Grid("red", gridSize*i,gridSize*j);
             }else if(count < gameSize*2 && count >= gameSize){
-                arr[i][j] = new Grid(gameSize, "blue", gridSize*i,gridSize*j);
+                arr[i][j] = new Grid("blue", gridSize*i,gridSize*j);
             }else{
-                arr[i][j] = new Grid(gameSize, "green", gridSize*i,gridSize*j);
+                arr[i][j] = new Grid("green", gridSize*i,gridSize*j);
             }
             count++;
         }
@@ -87,7 +89,7 @@ function fillSurface(arr, gameSize) {
 }*/
 
 //grid
-function Grid(gameSize, color, xPos, yPos) {
+function Grid(color, xPos, yPos) {
     this.size = canvasSize/gameSize;
     this.xPos = xPos;
     this.yPos = yPos;
@@ -96,7 +98,7 @@ function Grid(gameSize, color, xPos, yPos) {
 
 
 //selector circle
-function Selector(gameSize) {
+function Selector() {
     this.xPos = canvasSize/(gameSize*2);
     this.yPos = canvasSize/(gameSize*2);
     var halfDistance = canvasSize/(gameSize*2);
@@ -124,8 +126,6 @@ function Selector(gameSize) {
         Rubics.clear();
         Rubics.update();
 
-
-        //console.log("Y position: " + this.yPos);
         switch (direction){
             //left
             case 37:
@@ -173,7 +173,6 @@ function Selector(gameSize) {
                 break;
         }
     }
-
 }
 
 function eventControl(event) {
@@ -202,15 +201,3 @@ function eventControl(event) {
         }
     }
 }
-
-function update(gameSize){
-    for(var i = 0; i < gameSize; i++){
-        for(var j = 0; j < gameSize; j++){
-            var tempGrid = surface[i][j];
-            gameContext.fillStyle = tempGrid.color;
-            gameContext.fillRect(tempGrid.xPos, tempGrid.yPos, tempGrid.size, tempGrid.size);
-        }
-    }
-
-}
-
