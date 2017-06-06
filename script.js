@@ -52,41 +52,31 @@ var Rubics = {
 };
 
 function fillSurface(arr) {
-    var count = 0;
     var gridSize = canvasSize/gameSize;
     for(var i = 0; i < gameSize; i++){
         for(var j = 0; j < gameSize; j++){
-            if(count < gameSize){
-                arr[i][j] = new Grid("red", gridSize*j,gridSize*i);
-            }else if(count < gameSize*2 && count >= gameSize){
-                arr[i][j] = new Grid("blue", gridSize*j,gridSize*i);
-            }else{
-                arr[i][j] = new Grid("green", gridSize*j,gridSize*i);
+            //more cases can be added
+            switch (i){
+                case 0:
+                    arr[i][j] = new Grid("red", gridSize*i,gridSize*j);
+                    break;
+                case 1:
+                    arr[i][j] = new Grid("blue", gridSize*i,gridSize*j);
+                    break;
+                case 2:
+                    arr[i][j] = new Grid("green", gridSize*i,gridSize*j);
+                    break;
+                case 3:
+                    arr[i][j] = new Grid("black", gridSize*i,gridSize*j);
+                    break;
+                case 4:
+                    arr[i][j] = new Grid("magenta", gridSize*i,gridSize*j);
+                    break;
             }
-            count++;
         }
     }
     return arr;
 }
-
-
-//ask about 3d arrays
-/*function fillGrids(size) {
-    var gridArr = [];
-    gridArr[0] = [];
-    gridArr[0][0] = [];
-    var halfDistance = Rubics.canvas.width/(size*2);
-    console.log("Half distance: " + halfDistance);
-
-    for(var i = 1; i < Grid.size+1; i++){
-        for(var j = 1; j < Grid.size+1; j++){
-            gridArr[i][j][0] = halfDistance*i;
-            console.log(gridArr[i][j][0]);
-            gridArr[i][j][1] = halfDistance*j;
-        }
-    }
-    return gridArr;
-}*/
 
 //grid
 function Grid(color, xPos, yPos) {
@@ -106,6 +96,8 @@ function Selector() {
     this.color = "yellow";
     this.indexX = 0;
     this.indexY = 0;
+
+    this.outOfMap = false;
 
     this.xPosArr = [];
     this.xPosArr[0] = halfDistance;
@@ -134,8 +126,17 @@ function Selector() {
                 gameContext.beginPath();
                 gameContext.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
                 gameContext.fill();
-                if(this.xPos <= destination){
-                    clearInterval(movement);
+                //if required destination is met
+                if(this.outOfMap){
+                    if(this.xPos < 0 ){
+                        this.xPos = canvasSize;
+                        this.outOfMap = false;
+                    }
+                }else{
+                    if(this.xPos <= destination){
+                        clearInterval(movement);
+                        movement = false;
+                    }
                 }
                 break;
             //up
@@ -145,8 +146,17 @@ function Selector() {
                 gameContext.beginPath();
                 gameContext.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
                 gameContext.fill();
-                if(this.yPos <= destination){
-                    clearInterval(movement);
+
+                if(this.outOfMap){
+                    if(this.yPos < 0 ){
+                        this.yPos = canvasSize;
+                        this.outOfMap = false;
+                    }
+                }else{
+                    if(this.yPos <= destination){
+                        clearInterval(movement);
+                        movement = false;
+                    }
                 }
                 break;
             //right
@@ -156,8 +166,17 @@ function Selector() {
                 gameContext.beginPath();
                 gameContext.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
                 gameContext.fill();
-                if(this.xPos >= destination){
-                    clearInterval(movement);
+
+                if(this.outOfMap){
+                    if(this.xPos > canvasSize){
+                        this.xPos = 0;
+                        this.outOfMap = false;
+                    }
+                }else{
+                    if(this.xPos >= destination){
+                        clearInterval(movement);
+                        movement = false;
+                    }
                 }
                 break;
             //down
@@ -167,8 +186,17 @@ function Selector() {
                 gameContext.beginPath();
                 gameContext.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
                 gameContext.fill();
-                if(this.yPos >= destination){
-                    clearInterval(movement);
+
+                if(this.outOfMap){
+                    if(this.yPos > canvasSize){
+                        this.yPos = 0;
+                        this.outOfMap = false;
+                    }
+                }else{
+                    if(this.yPos >= destination){
+                        clearInterval(movement);
+                        movement = false;
+                    }
                 }
                 break;
         }
@@ -177,27 +205,53 @@ function Selector() {
 
 function eventControl(event) {
     if(event.keyCode >= 37 && event.keyCode <= 40){
-        switch (event.keyCode){
-            //left
-            case 37:
-                selector.indexX = selector.indexX-1;
-                movement = setInterval(function(){selector.move(event.keyCode, selector.xPosArr[selector.indexX])}, 0.1);
-                break;
-            //up
-            case 38:
-                selector.indexY = selector.indexY-1;
-                movement = setInterval(function(){selector.move(event.keyCode, selector.yPosArr[selector.indexY])}, 0.1);
-                break;
-            //right
-            case 39:
-                selector.indexX = selector.indexX+1;
-                movement = setInterval(function(){selector.move(event.keyCode, selector.xPosArr[selector.indexX])}, 0.1);
-                break;
-            //down
-            case 40:
-                selector.indexY = selector.indexY+1;
-                movement = setInterval(function(){selector.move(event.keyCode, selector.yPosArr[selector.indexY])}, 0.1);
-                break;
+        if(!movement){
+            switch (event.keyCode){
+                //left
+                case 37:
+                    selector.indexX--;
+                    if(selector.indexX < 0){
+                        selector.indexX = gameSize-1;
+                        selector.outOfMap = true;
+                        //movement = setInterval(function(){selector.move(event.keyCode, -selector.radius)}, 0.1);
+                    }
+                    movement = setInterval(function(){
+                        selector.move(event.keyCode, selector.xPosArr[selector.indexX])}, 0.1);
+                    break;
+                //up
+                case 38:
+                    selector.indexY = selector.indexY-1;
+                    if(selector.indexY < 0){
+                        selector.indexY = gameSize-1;
+                        selector.outOfMap = true;
+                        //movement = setInterval(function(){selector.move(event.keyCode, -selector.radius)}, 0.1);
+                    }
+                    movement = setInterval(function(){
+                        selector.move(event.keyCode, selector.yPosArr[selector.indexY])}, 0.1);
+                    break;
+                //right
+                case 39:
+                    selector.indexX = selector.indexX+1;
+                    if(selector.indexX > gameSize-1){
+                        selector.indexX = 0;
+                        selector.outOfMap = true;
+                        //movement = setInterval(function(){selector.move(event.keyCode, canvasSize+selector.radius)}, 0.1);
+                    }
+                    movement = setInterval(function(){
+                        selector.move(event.keyCode, selector.xPosArr[selector.indexX])}, 0.1);
+                    break;
+                //down
+                case 40:
+                    selector.indexY = selector.indexY+1;
+                    if(selector.indexY > gameSize-1){
+                        selector.indexY = 0;
+                        selector.outOfMap = true;
+                        //movement = setInterval(function(){selector.move(event.keyCode, canvasSize+selector.radius)}, 0.1);
+                    }
+                    movement = setInterval(function(){
+                        selector.move(event.keyCode, selector.yPosArr[selector.indexY])}, 0.1);
+                    break;
+            }
         }
     }
 }
