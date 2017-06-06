@@ -23,11 +23,6 @@ function Selector() {
         this.yPosArr[i] = this.yPosArr[i-1] + 2*halfDistance;
     }
 
-    Rubics.context.fillStyle = this.color;
-    Rubics.context.beginPath();
-    Rubics.context.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
-    Rubics.context.fill();
-
     this.move = function(direction, destination){
         Rubics.clear();
         Rubics.update();
@@ -36,10 +31,6 @@ function Selector() {
             //left
             case 37:
                 this.xPos -= 2;
-                gameContext.fillStyle = this.color;
-                gameContext.beginPath();
-                gameContext.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
-                gameContext.fill();
                 //if required destination is met
                 if(this.outOfMap){
                     if(this.xPos < 0 ){
@@ -56,11 +47,6 @@ function Selector() {
             //up
             case 38:
                 this.yPos -= 2;
-                gameContext.fillStyle = this.color;
-                gameContext.beginPath();
-                gameContext.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
-                gameContext.fill();
-
                 if(this.outOfMap){
                     if(this.yPos < 0 ){
                         this.yPos = canvasSize;
@@ -76,11 +62,6 @@ function Selector() {
             //right
             case 39:
                 this.xPos += 2;
-                gameContext.fillStyle = this.color;
-                gameContext.beginPath();
-                gameContext.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
-                gameContext.fill();
-
                 if(this.outOfMap){
                     if(this.xPos > canvasSize){
                         this.xPos = 0;
@@ -96,11 +77,6 @@ function Selector() {
             //down
             case 40:
                 this.yPos += 2;
-                gameContext.fillStyle = this.color;
-                gameContext.beginPath();
-                gameContext.arc(this.xPos,this.yPos,this.radius,0,2*Math.PI,false);
-                gameContext.fill();
-
                 if(this.outOfMap){
                     if(this.yPos > canvasSize){
                         this.yPos = 0;
@@ -115,6 +91,6 @@ function Selector() {
                 break;
         }
 
-        console.log("Selector X: " + this.indexX, "Selector Y: " + this.indexY);
+       // console.log("Selector X: " + this.indexX, "Selector Y: " + this.indexY);
     }
 }

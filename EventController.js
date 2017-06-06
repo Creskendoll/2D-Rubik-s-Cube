@@ -14,7 +14,6 @@ function EventController() {
                         if(selector.indexX < 0){
                             selector.indexX = gameSize-1;
                             selector.outOfMap = true;
-                            //movement = setInterval(function(){selector.move(event.keyCode, -selector.radius)}, 0.1);
                         }
                         movement = setInterval(function(){
                             selector.move(event.keyCode, selector.xPosArr[selector.indexX])}, 0.1);
@@ -25,7 +24,6 @@ function EventController() {
                         if(selector.indexY < 0){
                             selector.indexY = gameSize-1;
                             selector.outOfMap = true;
-                            //movement = setInterval(function(){selector.move(event.keyCode, -selector.radius)}, 0.1);
                         }
                         movement = setInterval(function(){
                             selector.move(event.keyCode, selector.yPosArr[selector.indexY])}, 0.1);
@@ -36,7 +34,6 @@ function EventController() {
                         if(selector.indexX > gameSize-1){
                             selector.indexX = 0;
                             selector.outOfMap = true;
-                            //movement = setInterval(function(){selector.move(event.keyCode, canvasSize+selector.radius)}, 0.1);
                         }
                         movement = setInterval(function(){
                             selector.move(event.keyCode, selector.xPosArr[selector.indexX])}, 0.1);
@@ -47,7 +44,6 @@ function EventController() {
                         if(selector.indexY > gameSize-1){
                             selector.indexY = 0;
                             selector.outOfMap = true;
-                            //movement = setInterval(function(){selector.move(event.keyCode, canvasSize+selector.radius)}, 0.1);
                         }
                         movement = setInterval(function(){
                             selector.move(event.keyCode, selector.yPosArr[selector.indexY])}, 0.1);
@@ -55,31 +51,47 @@ function EventController() {
                 }
             }
         }else{
+            var tempArr = new Array(gameSize);
+            var i = 0;
 
+            Rubics.clear();
+            Rubics.update();
             switch (event.key){
                 case "w":
-                    var horizLine = surface[selector.indexX];
-                    surface[0] = horizLine[gameSize-1];
-                    for(var i = 1; i < gameSize; i++){
-                        surface[i] = horizLine[i-1];
-                    }
-                    Rubics.update();
                     break;
                 case "s":
                     break;
                 case "a":
-                    var verticLine = new Array(gameSize);
-                    verticLine = surface[selector.indexY];
-                    surface[0] = verticLine[gameSize-1];
-                    for(var j = 1; j < gameSize; j++){
-                        surface[j] = verticLine[j-1];
+                    //vertical array, WORKS
+                    for(i = 0; i < gameSize; i++){
+                        tempArr[i] = surface[i][selector.indexY];
                     }
-                    Rubics.update();
+
+                    //swaps the places as needed but doesn't update surface
+                    for(i = 0; i < gameSize; i++){
+                        var tempGrid = tempArr[(i+1)%(gameSize)];
+                        surface[i][selector.indexY] = new Grid(tempGrid.color,
+                            tempArr[i].xPos, tempArr[i].yPos);
+                    }
                     break;
                 case "d":
+                    for(i = 0; i < gameSize; i++){
+                        tempArr[i] = surface[i][selector.indexY];
+                    }
+
+                    surface[0][selector.indexY] = new Grid(tempArr[gameSize-1].color, tempArr[0].xPos, tempArr[0].yPos);
+                   // console.log(surface[0][selector.indexY]);
+
+                    for(i = 1; i < gameSize; i++){
+                        surface[i][selector.indexY] = new Grid(tempArr[i-1].color, tempArr[i].xPos, tempArr[i].yPos);
+                    }
+                    break;
+                case " ":
+                    console.log(surface);
                     break;
             }
-
+            Rubics.clear();
+            Rubics.update();
         }
     }
 }

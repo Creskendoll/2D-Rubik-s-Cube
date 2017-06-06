@@ -1,9 +1,9 @@
 var surface;
 var selector;
-var movement;
-var eventController = new EventController(movement);
+var movement = false;
+var eventController;
 
-var gameSize = 3;
+var gameSize = 6;
 
 var canvasSize = 630;
 
@@ -20,9 +20,11 @@ function startGame() {
 
     surface = fillSurface(surface);
 
+    selector = new Selector();
+
     Rubics.update();
 
-    selector = new Selector();
+    eventController = new EventController();
 }
 
 var Rubics = {
@@ -41,15 +43,32 @@ var Rubics = {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
     update : function () {
+        //draw grids
+        var tempGrid;
         for(var i = 0; i < gameSize; i++){
             for(var j = 0; j < gameSize; j++){
-                var tempGrid = surface[i][j];
+                tempGrid = surface[i][j];
                 gameContext.fillStyle = tempGrid.color;
                 gameContext.fillRect(tempGrid.xPos, tempGrid.yPos, tempGrid.size, tempGrid.size);
             }
         }
+
+        //draw selector
+        gameContext.fillStyle = selector.color;
+        gameContext.beginPath();
+        gameContext.arc(selector.xPos,selector.yPos,selector.radius,0,2*Math.PI,false);
+        gameContext.fill();
     }
 };
+
+//will be usefull sometime...
+function construct2DArr() {
+    var result = new Array(gameSize);
+    for(var i = 0; i < gameSize; i++){
+        result[i] = new Array(gameSize);
+    }
+    return result;
+}
 
 function fillSurface(arr) {
     var gridSize = canvasSize/gameSize;
@@ -71,6 +90,12 @@ function fillSurface(arr) {
                     break;
                 case 4:
                     arr[i][j] = new Grid("magenta", gridSize*i,gridSize*j);
+                    break;
+                case 5:
+                    arr[i][j] = new Grid("purple", gridSize*i,gridSize*j);
+                    break;
+                case 6:
+                    arr[i][j] = new Grid("pink", gridSize*i,gridSize*j);
                     break;
             }
         }
