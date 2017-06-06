@@ -57,11 +57,11 @@ function fillSurface(arr) {
     for(var i = 0; i < gameSize; i++){
         for(var j = 0; j < gameSize; j++){
             if(count < gameSize){
-                arr[i][j] = new Grid("red", gridSize*i,gridSize*j);
+                arr[i][j] = new Grid("red", gridSize*j,gridSize*i);
             }else if(count < gameSize*2 && count >= gameSize){
-                arr[i][j] = new Grid("blue", gridSize*i,gridSize*j);
+                arr[i][j] = new Grid("blue", gridSize*j,gridSize*i);
             }else{
-                arr[i][j] = new Grid("green", gridSize*i,gridSize*j);
+                arr[i][j] = new Grid("green", gridSize*j,gridSize*i);
             }
             count++;
         }
