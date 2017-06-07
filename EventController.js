@@ -51,6 +51,7 @@ function EventController() {
                 }
             }
         }else{
+            console.log(event.key );
             var tempArr = new Array(gameSize);
             var tempGrid;
             var i = 0;
@@ -105,6 +106,13 @@ function EventController() {
                     break;
                 case "c":
                     console.log(surface);
+                    break;
+                case "Escape":
+                    Rubics.clear();
+                    Rubics.gameCanvas.style.display = 'none';
+                    Rubics.infoCanvas.style.display = 'none';
+                    gameMenu.style.display = 'initial';
+                    gameStarted = false;
                     break;
             }
             Rubics.clear();

@@ -20,6 +20,10 @@ function startGame() {
     gameMenu.style.display = 'none';
     gameStarted = true;
 
+
+    Rubics.gameCanvas.style.display = 'initial';
+    Rubics.infoCanvas.style.display = 'initial';
+
     //initialise game variables
     var el = document.getElementById("gameSize");
     gameSize = Number(el.options[el.selectedIndex].value);
