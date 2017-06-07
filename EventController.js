@@ -3,7 +3,6 @@
  */
 function EventController() {
     this.handleKeyEvent = function(event){
-        //console.log(event);
         //if arrow keys are pressed
         if(event.keyCode >= 37 && event.keyCode <= 40){
             if(!movement){
@@ -51,7 +50,6 @@ function EventController() {
                 }
             }
         }else{
-            console.log(event.key );
             var tempArr = new Array(gameSize);
             var tempGrid;
             var i = 0;
@@ -108,16 +106,16 @@ function EventController() {
                     console.log(surface);
                     break;
                 case "Escape":
-                    Rubics.clear();
                     Rubics.gameCanvas.style.display = 'none';
                     Rubics.infoCanvas.style.display = 'none';
                     gameMenu.style.display = 'initial';
-                    gameStarted = false;
+                    gameRestarted = true;
                     break;
             }
             Rubics.clear();
             Rubics.update();
         }
-    }
+    };
+
 }
 

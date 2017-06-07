@@ -3,14 +3,14 @@ var surface;
 var selector;
 var selectorSpeed;
 
-var movement = false;
+var movement;
 var eventController;
 
 var gameMenu;
 
 var gameSize;
 
-var gameStarted = false;
+var gameRestarted = false;
 
 var canvasSize = 630;
 
@@ -18,8 +18,7 @@ var gameContext;
 function startGame() {
     gameMenu = document.getElementById("gameMenu");
     gameMenu.style.display = 'none';
-    gameStarted = true;
-
+    movement = false;
 
     Rubics.gameCanvas.style.display = 'initial';
     Rubics.infoCanvas.style.display = 'initial';
@@ -30,10 +29,10 @@ function startGame() {
     el = document.getElementById("selSpeed");
     selectorSpeed = Number(el.options[el.selectedIndex].value);
 
-    Rubics.start();
-    gameContext = Rubics.context;
-
     selector = new Selector();
+    Rubics.start();
+
+    gameContext = Rubics.context;
     //initialize an empty array for our surface
     surface = new Array(gameSize);
     for(var i = 0; i < gameSize; i++){
@@ -44,9 +43,11 @@ function startGame() {
     //fills the surface with grids
     surface = fillSurface(surface);
 
-    Rubics.update();
+    if(!eventController){
+        eventController = new EventController();
+    }
 
-    eventController = new EventController();
+    Rubics.update();
 }
 
 var Rubics = {
@@ -68,7 +69,7 @@ var Rubics = {
         this.infoCanvas.style.marginLeft = "10px";
         document.body.appendChild(this.infoCanvas);
 
-        if(gameStarted){
+        if(!gameRestarted){
             document.addEventListener('keydown', function (event) {
                 eventController.handleKeyEvent(event);
             });
