@@ -1,30 +1,44 @@
 var surface;
 
-
 var selector;
-var selectorSpeed = 2;
+var selectorSpeed;
 
 var movement = false;
 var eventController;
 
-var gameSize = 6;
+var gameMenu;
+
+var gameSize;
+
+var gameStarted = false;
 
 var canvasSize = 630;
 
 var gameContext;
 function startGame() {
+    gameMenu = document.getElementById("gameMenu");
+    gameMenu.style.display = 'none';
+    gameStarted = true;
+
+    //initialise game variables
+    var el = document.getElementById("gameSize");
+    gameSize = Number(el.options[el.selectedIndex].value);
+    el = document.getElementById("selSpeed");
+    selectorSpeed = Number(el.options[el.selectedIndex].value);
+
     Rubics.start();
     gameContext = Rubics.context;
 
+    selector = new Selector();
     //initialize an empty array for our surface
     surface = new Array(gameSize);
     for(var i = 0; i < gameSize; i++){
         surface[i] = new Array(gameSize);
     }
 
-    surface = fillSurface(surface);
 
-    selector = new Selector();
+    //fills the surface with grids
+    surface = fillSurface(surface);
 
     Rubics.update();
 
@@ -32,15 +46,16 @@ function startGame() {
 }
 
 var Rubics = {
-    canvas : document.createElement("canvas"),
+    gameCanvas : document.createElement("canvas"),
     infoCanvas : document.createElement("canvas"),
     start : function(){
         //left side canvas
-        this.canvas.height = canvasSize;
-        this.canvas.width = canvasSize;
-        this.canvas.style.border = "1px solid";
-        this.context = this.canvas.getContext("2d");
-        document.body.appendChild(this.canvas);
+        this.gameCanvas.height = canvasSize;
+        this.gameCanvas.width = canvasSize;
+        this.gameCanvas.style.border = "1px solid";
+        this.gameCanvas.style.zIndex = 0;
+        this.context = this.gameCanvas.getContext("2d");
+        document.body.appendChild(this.gameCanvas);
 
         //right side canvas
         this.infoCanvas.height = canvasSize;
@@ -49,13 +64,15 @@ var Rubics = {
         this.infoCanvas.style.marginLeft = "10px";
         document.body.appendChild(this.infoCanvas);
 
+        if(gameStarted){
+            document.addEventListener('keydown', function (event) {
+                eventController.handleKeyEvent(event);
+            });
+        }
 
-        document.addEventListener('keydown', function (event) {
-            eventController.handleKeyEvent(event);
-        });
     },
     clear : function() {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.clearRect(0, 0, this.gameCanvas.width, this.gameCanvas.height);
     },
     update : function () {
         //draw grids

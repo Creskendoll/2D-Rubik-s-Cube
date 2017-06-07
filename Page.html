@@ -1,10 +1,40 @@
 <html>
 <head>
 	<title>Main Page</title>
+</head>
+<body>
+	<table id="gameMenu" cellspacing="2" cellpadding="2" border="1">
+		<tr>
+			<td align="right">Game Size</td>
+			<td>
+				<select id="gameSize">
+					<option value=3>3</option>
+					<option value=4>4</option>
+					<option value=5>5</option>
+					<option value=6>6</option>
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<td align="right">Selector Speed</td>
+			<td>
+				<select id="selSpeed">
+					<option value=2>2</option>
+					<option value=4>4</option>
+					<option value=6>6</option>
+					<option value=8>8</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td align="right"></td>
+			<td><input id="startButton" type="button" value="Start" onclick="startGame()"/></td>
+		</tr>
+
+	</table>
 	<script type="text/javascript" src="EventController.js"></script>
 	<script type="text/javascript" src="Selector.js"></script>
 	<script type="text/javascript" src="script.js"></script>
-</head>
-<body onload="startGame()">
 </body>
 </html>
