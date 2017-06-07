@@ -27,7 +27,7 @@ function Selector() {
         switch (direction){
             //left
             case 37:
-                this.xPos -= 2;
+                this.xPos -= selectorSpeed;
                 //if required destination is met
                 if(this.outOfMap){
                     if(this.xPos < 0 ){
@@ -43,7 +43,7 @@ function Selector() {
                 break;
             //up
             case 38:
-                this.yPos -= 2;
+                this.yPos -= selectorSpeed;
                 if(this.outOfMap){
                     if(this.yPos < 0 ){
                         this.yPos = canvasSize;
@@ -58,7 +58,7 @@ function Selector() {
                 break;
             //right
             case 39:
-                this.xPos += 2;
+                this.xPos += selectorSpeed;
                 if(this.outOfMap){
                     if(this.xPos > canvasSize){
                         this.xPos = 0;
@@ -73,7 +73,7 @@ function Selector() {
                 break;
             //down
             case 40:
-                this.yPos += 2;
+                this.yPos += selectorSpeed;
                 if(this.outOfMap){
                     if(this.yPos > canvasSize){
                         this.yPos = 0;

@@ -1,5 +1,9 @@
 var surface;
+
+
 var selector;
+var selectorSpeed = 2;
+
 var movement = false;
 var eventController;
 
@@ -29,11 +33,22 @@ function startGame() {
 
 var Rubics = {
     canvas : document.createElement("canvas"),
+    infoCanvas : document.createElement("canvas"),
     start : function(){
+        //left side canvas
         this.canvas.height = canvasSize;
         this.canvas.width = canvasSize;
+        this.canvas.style.border = "1px solid";
         this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        document.body.appendChild(this.canvas);
+
+        //right side canvas
+        this.infoCanvas.height = canvasSize;
+        this.infoCanvas.width = canvasSize;
+        this.infoCanvas.style.border = "1px solid";
+        this.infoCanvas.style.marginLeft = "10px";
+        document.body.appendChild(this.infoCanvas);
+
 
         document.addEventListener('keydown', function (event) {
             eventController.handleKeyEvent(event);
