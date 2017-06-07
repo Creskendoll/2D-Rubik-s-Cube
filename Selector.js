@@ -24,9 +24,6 @@ function Selector() {
     }
 
     this.move = function(direction, destination){
-        Rubics.clear();
-        Rubics.update();
-
         switch (direction){
             //left
             case 37:
@@ -90,6 +87,8 @@ function Selector() {
                 }
                 break;
         }
+        Rubics.clear();
+        Rubics.update();
 
        // console.log("Selector X: " + this.indexX, "Selector Y: " + this.indexY);
     }

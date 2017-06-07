@@ -52,14 +52,31 @@ function EventController() {
             }
         }else{
             var tempArr = new Array(gameSize);
+            var tempGrid;
             var i = 0;
 
-            Rubics.clear();
-            Rubics.update();
             switch (event.key){
                 case "w":
+                    for(i = 0; i < gameSize; i++){
+                        tempArr[i] = surface[selector.indexX][i];
+                    }
+
+                    for(i = 0; i < gameSize; i++){
+                        tempGrid = tempArr[(i+1)%(gameSize)];
+                        surface[selector.indexX][i] = new Grid(tempGrid.color,
+                            tempArr[i].xPos, tempArr[i].yPos);
+                    }
                     break;
                 case "s":
+                    for(i = 0; i < gameSize; i++){
+                        tempArr[i] = surface[selector.indexX][i];
+                    }
+
+                    surface[selector.indexX][0] = new Grid(tempArr[gameSize-1].color, tempArr[0].xPos, tempArr[0].yPos);
+
+                    for(i = 1; i < gameSize; i++){
+                        surface[selector.indexX][i] = new Grid(tempArr[i-1].color, tempArr[i].xPos, tempArr[i].yPos);
+                    }
                     break;
                 case "a":
                     //vertical array, WORKS
@@ -69,7 +86,7 @@ function EventController() {
 
                     //swaps the places as needed but doesn't update surface
                     for(i = 0; i < gameSize; i++){
-                        var tempGrid = tempArr[(i+1)%(gameSize)];
+                        tempGrid = tempArr[(i+1)%(gameSize)];
                         surface[i][selector.indexY] = new Grid(tempGrid.color,
                             tempArr[i].xPos, tempArr[i].yPos);
                     }
@@ -95,3 +112,4 @@ function EventController() {
         }
     }
 }
+
