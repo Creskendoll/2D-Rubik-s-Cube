@@ -109,7 +109,6 @@ function EventController() {
                     Rubics.gameCanvas.style.display = 'none';
                     Rubics.infoCanvas.style.display = 'none';
                     gameMenu.style.display = 'initial';
-                    gameRestarted = true;
                     document.getElementById("startButton").value = "Restart";
                     break;
             }

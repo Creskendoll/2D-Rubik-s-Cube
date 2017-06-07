@@ -10,7 +10,6 @@ var gameMenu;
 
 var gameSize;
 
-var gameRestarted = false;
 
 var canvasSize = 630;
 
@@ -43,11 +42,10 @@ function startGame() {
     //fills the surface with grids
     surface = fillSurface(surface);
 
-    if(!eventController){
-        eventController = new EventController();
-    }
+    eventController = new EventController();
 
     Rubics.update();
+    drawInfoCanvas();
 }
 
 var Rubics = {
@@ -69,7 +67,7 @@ var Rubics = {
         this.infoCanvas.style.marginLeft = "10px";
         document.body.appendChild(this.infoCanvas);
 
-        if(!gameRestarted){
+        if(!eventController){
             document.addEventListener('keydown', function (event) {
                 eventController.handleKeyEvent(event);
             });
@@ -97,15 +95,6 @@ var Rubics = {
         gameContext.fill();
     }
 };
-
-//will be usefull sometime...
-function construct2DArr() {
-    var result = new Array(gameSize);
-    for(var i = 0; i < gameSize; i++){
-        result[i] = new Array(gameSize);
-    }
-    return result;
-}
 
 function fillSurface(arr) {
     var gridSize = canvasSize/gameSize;
