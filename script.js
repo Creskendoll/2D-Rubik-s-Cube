@@ -16,6 +16,7 @@ var canvasSize = 630;
 
 var gameContext;
 function startGame() {
+    document.getElementById("gameMan").style.display = 'none';
     gameMenu = document.getElementById("gameMenu");
     gameMenu.style.display = 'none';
     movement = false;
@@ -45,15 +46,13 @@ function startGame() {
     for(var i = 0; i < gameSize; i++){
         surface[i] = new Array(gameSize);
     }
-
-
     //fills the surface with grids
     surface = fillSurface(surface);
 
-    eventController = new EventController();
-
-    Rubics.update();
     drawInfoCanvas();
+
+    eventController = new EventController();
+    Rubics.update();
 }
 
 
@@ -65,7 +64,6 @@ var Rubics = {
         this.gameCanvas.height = canvasSize;
         this.gameCanvas.width = canvasSize;
         this.gameCanvas.style.border = "1px solid";
-        this.gameCanvas.style.zIndex = 0;
         this.context = this.gameCanvas.getContext("2d");
         document.body.appendChild(this.gameCanvas);
 

@@ -106,9 +106,10 @@ function EventController() {
                     console.log(surface);
                     break;
                 case "Escape":
+                    document.getElementById("gameMan").style.display = 'initial';
                     Rubics.gameCanvas.style.display = 'none';
                     Rubics.infoCanvas.style.display = 'none';
-                    gameMenu.style.display = 'inline';
+                    gameMenu.style.display = 'initial';
                     document.getElementById("startButton").value = "Restart";
                     break;
             }

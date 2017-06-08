@@ -18,7 +18,9 @@
 	</script>
 </head>
 <body onload="hideBut()">
-	<table id="gameMenu" cellspacing="2" cellpadding="2" border="1">
+<h2 id="gameMan">Use the arrow keys to navigate around the board and "WASD" keys to move the row and columns.</h2>
+
+	<table id="gameMenu" cellspacing="2" cellpadding="2">
 		<tr>
 			<td align="right">Game Size</td>
 			<td>
@@ -46,6 +48,8 @@
 			<script type="text/javascript">
 				//TODO:refurnish this, it's a shit structure
                 function resumeGame() {
+                    document.getElementById("gameMan").style.display = 'none';
+
                     var el = document.getElementById("gameSize");
                     gameSize = Number(el.options[el.selectedIndex].value);
                     if(currentGame == gameSize){
@@ -71,7 +75,6 @@
 
 	</table>
 
-	<p>Use the arrow keys to navigate around the board and "WASD" keys to move the row and columns.</p>
 	<script type="text/javascript" src="InfoCanvas.js"></script>
 	<script type="text/javascript" src="script.js"></script>
 	<script type="text/javascript" src="EventController.js"></script>
