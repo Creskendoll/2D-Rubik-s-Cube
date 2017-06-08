@@ -49,10 +49,10 @@ function startGame() {
     //fills the surface with grids
     surface = fillSurface(surface);
 
-    drawInfoCanvas();
-
     eventController = new EventController();
+
     Rubics.update();
+    drawInfoCanvas();
 }
 
 
@@ -64,18 +64,19 @@ var Rubics = {
         this.gameCanvas.height = canvasSize;
         this.gameCanvas.width = canvasSize;
         this.gameCanvas.style.border = "1px solid";
+        this.gameCanvas.style.position = 'absolute';
         this.context = this.gameCanvas.getContext("2d");
         document.body.appendChild(this.gameCanvas);
 
         //right side canvas
         this.infoCanvas.height = canvasSize;
         this.infoCanvas.width = canvasSize;
-        this.gameCanvas.style.zIndex = 0;
         this.infoCanvas.style.border = "1px solid";
-        this.infoCanvas.style.marginLeft = "10px";
-        this.infoContext = this.infoCanvas.getContext("2d");
+        this.infoCanvas.style.position = 'absolute';
+        this.infoCanvas.style.left = canvasSize+80 + "px";
         document.body.appendChild(this.infoCanvas);
 
+        //chacks if game is restarted, adds event listener if not
         if(!eventController){
             document.addEventListener('keydown', function (event) {
                 eventController.handleKeyEvent(event);
@@ -88,19 +89,17 @@ var Rubics = {
     },
     update : function () {
         //draw grids
-        var tempGrid;
-        for(var i = 0; i < gameSize; i++){
-            for(var j = 0; j < gameSize; j++){
-                tempGrid = surface[i][j];
-                gameContext.fillStyle = tempGrid.color;
-                gameContext.fillRect(tempGrid.xPos, tempGrid.yPos, tempGrid.size, tempGrid.size);
+        for (var i = 0; i < gameSize; i++) {
+            for (var j = 0; j < gameSize; j++) {
+                gameContext.fillStyle = surface[i][j].color;
+                gameContext.fillRect(surface[i][j].xPos, surface[i][j].yPos, surface[i][j].size, surface[i][j].size);
             }
         }
 
         //draw selector
         gameContext.fillStyle = selector.color;
         gameContext.beginPath();
-        gameContext.arc(selector.xPos,selector.yPos,selector.radius,0,2*Math.PI,false);
+        gameContext.arc(selector.xPos, selector.yPos, selector.radius, 0, 2 * Math.PI, false);
         gameContext.fill();
     }
 };
