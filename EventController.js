@@ -108,7 +108,7 @@ function EventController() {
                 case "Escape":
                     Rubics.gameCanvas.style.display = 'none';
                     Rubics.infoCanvas.style.display = 'none';
-                    gameMenu.style.display = 'initial';
+                    gameMenu.style.display = 'inline';
                     document.getElementById("startButton").value = "Restart";
                     break;
             }

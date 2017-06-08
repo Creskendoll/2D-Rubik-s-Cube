@@ -19,8 +19,10 @@ function startGame() {
     gameMenu.style.display = 'none';
     movement = false;
 
-    Rubics.gameCanvas.style.display = 'initial';
-    Rubics.infoCanvas.style.display = 'initial';
+    //need to make the resume button visible
+    document.getElementById("resumeButton").style.display = 'inline';
+    Rubics.gameCanvas.style.display = 'inline';
+    Rubics.infoCanvas.style.display = 'inline';
 
     //initialise game variables
     var el = document.getElementById("gameSize");
@@ -63,8 +65,10 @@ var Rubics = {
         //right side canvas
         this.infoCanvas.height = canvasSize;
         this.infoCanvas.width = canvasSize;
+        this.gameCanvas.style.zIndex = 0;
         this.infoCanvas.style.border = "1px solid";
         this.infoCanvas.style.marginLeft = "10px";
+        this.infoContext = this.infoCanvas.getContext("2d");
         document.body.appendChild(this.infoCanvas);
 
         if(!eventController){

@@ -1,8 +1,7 @@
 function drawInfoCanvas() {
     var infoSurface = construct2DArr();
     var infoCanvasData = Rubics.infoCanvas.getBoundingClientRect();
-    console.log(infoCanvasData.left);
-    console.log(infoCanvasData.top);
+    var infoContext = Rubics.infoContext;
     var gridSize = canvasSize/gameSize;
     var i,j;
 
@@ -12,17 +11,16 @@ function drawInfoCanvas() {
         }
     }
 
-
     //draw grids
     var tempGrid;
     for(i = 0; i < gameSize; i++){
         for(j = 0; j < gameSize; j++){
             tempGrid = infoSurface[i][j];
-            gameContext.fillStyle = tempGrid.color;
-            gameContext.fillRect(tempGrid.xPos, tempGrid.yPos, tempGrid.size, tempGrid.size);
+            //console.log("Temp Grid Info: " + tempGrid.xPos + " " + tempGrid.yPos);
+            infoContext.fillStyle = tempGrid.color;
+            infoContext.fillRect(tempGrid.xPos, tempGrid.yPos, tempGrid.size, tempGrid.size);
         }
     }
-    gameContext.fill();
 }
 
 //will be usefull sometime...

@@ -1,8 +1,13 @@
 <html>
 <head>
 	<title>Main Page</title>
+	<script type="text/javascript">
+	function hideBut() {
+        document.getElementById("resumeButton").style.display = 'none';
+    }
+	</script>
 </head>
-<body>
+<body onload="hideBut()">
 	<table id="gameMenu" cellspacing="2" cellpadding="2" border="1">
 		<tr>
 			<td align="right">Game Size</td>
@@ -28,7 +33,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right"></td>
+			<td align="right"><input id="resumeButton" type="button" value="Resume" onclick=""/></td>
 			<td><input id="startButton" type="button" value="Start" onclick="startGame()"/></td>
 		</tr>
 
