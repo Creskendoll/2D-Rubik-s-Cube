@@ -7,7 +7,7 @@ function drawInfoCanvas() {
 
     for(i = 0; i < gameSize; i++){
         for(j = 0; j < gameSize; j++){
-            infoSurface[i][j] = new Grid("black", infoCanvasData.left+(gridSize*i),infoCanvasData.top+(gridSize*j));
+            infoSurface[i][j] = new Grid("red", infoCanvasData.left+(gridSize*i),infoCanvasData.top+(gridSize*j));
         }
     }
 

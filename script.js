@@ -56,6 +56,7 @@ function startGame() {
     drawInfoCanvas();
 }
 
+
 var Rubics = {
     gameCanvas : document.createElement("canvas"),
     infoCanvas : document.createElement("canvas"),
@@ -106,6 +107,7 @@ var Rubics = {
     }
 };
 
+//gives grids their initial colors
 function fillSurface(arr) {
     var gridSize = canvasSize/gameSize;
     for(var i = 0; i < gameSize; i++){

@@ -5,6 +5,16 @@
 	function hideBut() {
         document.getElementById("resumeButton").style.display = 'none';
     }
+    function selectionChanged(){
+        var el = document.getElementById("gameSize");
+        gameSize = Number(el.options[el.selectedIndex].value);
+	    if(gameSize == currentGame){
+            document.getElementById("resumeButton").style.display = 'inline';
+        }else{
+            document.getElementById("startButton").value = "Start";
+            document.getElementById("resumeButton").style.display = 'none';
+        }
+	}
 	</script>
 </head>
 <body onload="hideBut()">
@@ -12,7 +22,7 @@
 		<tr>
 			<td align="right">Game Size</td>
 			<td>
-				<select id="gameSize">
+				<select id="gameSize" onchange="selectionChanged()">
 					<option value=3>3</option>
 					<option value=4>4</option>
 					<option value=5>5</option>
@@ -34,6 +44,7 @@
 		</tr>
 		<tr>
 			<script type="text/javascript">
+				//TODO:refurnish this, it's a shit structure
                 function resumeGame() {
                     var el = document.getElementById("gameSize");
                     gameSize = Number(el.options[el.selectedIndex].value);
