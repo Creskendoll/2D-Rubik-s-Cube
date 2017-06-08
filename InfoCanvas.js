@@ -1,3 +1,4 @@
+//TODO:use this to compare playable surface to infoSurface
 function drawInfoCanvas() {
     var infoSurface = construct2DArr();
     var gridSize = canvasSize/gameSize;
@@ -17,6 +18,8 @@ function drawInfoCanvas() {
             context.fillRect(infoSurface[i][j].xPos, infoSurface[i][j].yPos, infoSurface[i][j].size, infoSurface[i][j].size);
         }
     }
+
+    return infoSurface;
 }
 
 function construct2DArr() {

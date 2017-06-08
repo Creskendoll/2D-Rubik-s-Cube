@@ -74,6 +74,9 @@ var Rubics = {
         this.infoCanvas.style.border = "1px solid";
         this.infoCanvas.style.position = 'absolute';
         this.infoCanvas.style.left = canvasSize+80 + "px";
+        this.infoCanvas.addEventListener('mouseover', function () {
+            alert("moused over")
+        });
         document.body.appendChild(this.infoCanvas);
 
         //chacks if game is restarted, adds event listener if not
@@ -88,13 +91,27 @@ var Rubics = {
         this.context.clearRect(0, 0, this.gameCanvas.width, this.gameCanvas.height);
     },
     update : function () {
-        //draw grids
+        //draw surface
         for (var i = 0; i < gameSize; i++) {
             for (var j = 0; j < gameSize; j++) {
                 gameContext.fillStyle = surface[i][j].color;
                 gameContext.fillRect(surface[i][j].xPos, surface[i][j].yPos, surface[i][j].size, surface[i][j].size);
             }
         }
+
+        //vertical line
+        gameContext.beginPath();
+        gameContext.moveTo(0,selector.yPos);
+        gameContext.lineTo(canvasSize, selector.yPos);
+        gameContext.strokeStyle = "yellow";
+        gameContext.stroke();
+
+        //horizontal line
+        gameContext.beginPath();
+        gameContext.moveTo(selector.xPos,0);
+        gameContext.lineTo(selector.xPos, canvasSize);
+        gameContext.strokeStyle = "yellow";
+        gameContext.stroke();
 
         //draw selector
         gameContext.fillStyle = selector.color;
