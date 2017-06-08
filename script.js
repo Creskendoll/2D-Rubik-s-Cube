@@ -10,6 +10,7 @@ var gameMenu;
 
 var gameSize;
 
+var currentGame;
 
 var canvasSize = 630;
 
@@ -21,12 +22,17 @@ function startGame() {
 
     //need to make the resume button visible
     document.getElementById("resumeButton").style.display = 'inline';
+
+    //show game canvas'
     Rubics.gameCanvas.style.display = 'inline';
     Rubics.infoCanvas.style.display = 'inline';
 
     //initialise game variables
     var el = document.getElementById("gameSize");
     gameSize = Number(el.options[el.selectedIndex].value);
+
+    currentGame = gameSize;
+
     el = document.getElementById("selSpeed");
     selectorSpeed = Number(el.options[el.selectedIndex].value);
 

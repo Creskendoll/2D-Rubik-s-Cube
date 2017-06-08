@@ -33,7 +33,28 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right"><input id="resumeButton" type="button" value="Resume" onclick=""/></td>
+			<script type="text/javascript">
+                function resumeGame() {
+                    var el = document.getElementById("gameSize");
+                    gameSize = Number(el.options[el.selectedIndex].value);
+                    if(currentGame == gameSize){
+                        //hide menu
+                        gameMenu = document.getElementById("gameMenu");
+                        gameMenu.style.display = 'none';
+                        movement = false;
+
+                        el = document.getElementById("selSpeed");
+                        selectorSpeed = Number(el.options[el.selectedIndex].value);
+
+                        //show game canvas'
+                        Rubics.gameCanvas.style.display = 'inline';
+                        Rubics.infoCanvas.style.display = 'inline';
+					}else{
+                        startGame();
+					}
+                }
+			</script>
+			<td align="right"><input id="resumeButton" type="button" value="Resume" onclick="resumeGame()"/></td>
 			<td><input id="startButton" type="button" value="Start" onclick="startGame()"/></td>
 		</tr>
 
