@@ -99,12 +99,15 @@ var Rubics = {
             }
         }
 
-        for(i = 0; i < gameSize; i++){
-            for(j = 0; j < gameSize; j++){
-                if(surface[i][j].color != infoSuraface[i][j].color){
-                    break;
+        if(infoSuraface){
+            for(i = 0; i < gameSize; i++){
+                for(j = 0; j < gameSize; j++){
+                    if(surface[i][j].color != infoSuraface[i][j].color){
+                        i = gameSize;
+                        break;
+                    }
+                    alert("Aferim amk işsizi.");
                 }
-                alert("Aferim amk işsizi.");
             }
         }
 
