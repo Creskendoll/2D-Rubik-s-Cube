@@ -102,8 +102,11 @@ function EventController() {
                         surface[i][selector.indexY] = new Grid(tempArr[i-1].color, tempArr[i].xPos, tempArr[i].yPos);
                     }
                     break;
-                case "c":
-                    console.log(surface);
+                case "r":
+                    randomizeSurface();
+                    Rubics.update();
+                    /*var file = new File([gameData], "rubicsDat.txt", {type: "text/plain;charset=utf-8"});
+                    saveAs(file);*/
                     break;
                 case "Escape":
                     document.getElementById("gameMan").style.display = 'initial';
@@ -117,6 +120,31 @@ function EventController() {
             Rubics.update();
         }
     };
+}
 
+function randomizeSurface() {
+    for(var i = 0; i < gameSize; i++){
+        for(var j = 0; j < gameSize; j++){
+            var randI = Math.floor(Math.random() * gameSize);
+            var randJ = Math.floor(Math.random() * gameSize);
+            if(randJ != j && randI != i){
+                var tempColor = surface[i][j].color;
+                surface[i][j].color = surface[randI][randJ].color;
+                surface[randI][randJ].color = tempColor;
+            }else{
+                j--;
+            }
+        }
+    }
+}
+
+
+//this is for gathering data from the game board and saving it on the local machine
+function gatherData(surface) {
+    for(var i = 0; i < gameSize; i++){
+        for(var j = 0; j < gameSize; j++){
+
+        }
+    }
 }
 

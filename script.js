@@ -13,8 +13,9 @@ var gameSize;
 var currentGame;
 
 var canvasSize = 630;
-
 var gameContext;
+
+var gameData;
 function startGame() {
     document.getElementById("gameMan").style.display = 'none';
     gameMenu = document.getElementById("gameMenu");
@@ -75,7 +76,7 @@ var Rubics = {
         this.infoCanvas.style.position = 'absolute';
         this.infoCanvas.style.left = canvasSize+80 + "px";
         this.infoCanvas.addEventListener('mouseover', function () {
-            alert("moused over")
+
         });
         document.body.appendChild(this.infoCanvas);
 
