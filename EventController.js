@@ -103,9 +103,8 @@ function EventController() {
                     }
                     break;
                 case "r":
-                    drawInfoCanvas();
+                    infoSurface.drawInfoSurface();
                     randomizeSurface();
-                    Rubics.update();
                     /*var file = new File([gameData], "rubicsDat.txt", {type: "text/plain;charset=utf-8"});
                     saveAs(file);*/
                     break;

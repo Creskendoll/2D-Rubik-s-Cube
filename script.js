@@ -1,5 +1,6 @@
 var surface;
-var infoSuraface;
+var infoSurface;
+var goalSurface;
 
 var selector;
 var selectorSpeed;
@@ -38,6 +39,8 @@ function startGame() {
     selectorSpeed = Number(el.options[el.selectedIndex].value);
 
     selector = new Selector();
+    infoSurface = new InfoCanvas();
+
     Rubics.start();
 
     gameContext = Rubics.context;
@@ -99,14 +102,30 @@ var Rubics = {
             }
         }
 
-        if(infoSuraface){
+        var gameFinished = true;
+       if(infoSurface.infoSurface != -1){
             for(i = 0; i < gameSize; i++){
                 for(j = 0; j < gameSize; j++){
-                    if(surface[i][j].color != infoSuraface[i][j].color){
+                    if(surface[i][j].color != goalSurface[i][j].color){
                         i = gameSize;
+                        gameFinished = false;
                         break;
                     }
-                    alert("Aferim amk işsizi.");
+                }
+            }
+
+            if(gameFinished){
+                if(confirm("Aferim amk işsizi. Restart?")){
+                    infoSurface.clearSurface();
+                    startGame();
+                }else{
+                    //return to menu
+                    Rubics.gameCanvas.style.display = 'none';
+                    Rubics.infoCanvas.style.display = 'none';
+                    document.getElementById("gameMan").style.display = 'initial';
+                    gameMenu.style.display = 'initial';
+                    document.getElementById("resumeButton").style.display = 'none';
+                    document.getElementById("startButton").value = "Start";
                 }
             }
         }
