@@ -1,13 +1,12 @@
 //TODO:use this to compare playable surface to infoSurface
 function drawInfoCanvas() {
     var infoSurface = construct2DArr();
-    var gridSize = canvasSize/gameSize;
     var i,j;
     var context = Rubics.infoCanvas.getContext("2d");
 
     for(i = 0; i < gameSize; i++){
         for(j = 0; j < gameSize; j++){
-            infoSurface[i][j] = new Grid("red", gridSize*i,gridSize*j);
+            infoSurface[i][j] = surface[i][j];
         }
     }
 

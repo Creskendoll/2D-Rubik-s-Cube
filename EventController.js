@@ -103,6 +103,7 @@ function EventController() {
                     }
                     break;
                 case "r":
+                    drawInfoCanvas();
                     randomizeSurface();
                     Rubics.update();
                     /*var file = new File([gameData], "rubicsDat.txt", {type: "text/plain;charset=utf-8"});
@@ -137,7 +138,6 @@ function randomizeSurface() {
         }
     }
 }
-
 
 //this is for gathering data from the game board and saving it on the local machine
 function gatherData(surface) {

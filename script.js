@@ -1,4 +1,5 @@
 var surface;
+var infoSuraface;
 
 var selector;
 var selectorSpeed;
@@ -14,8 +15,6 @@ var currentGame;
 
 var canvasSize = 630;
 var gameContext;
-
-var gameData;
 function startGame() {
     document.getElementById("gameMan").style.display = 'none';
     gameMenu = document.getElementById("gameMenu");
@@ -53,7 +52,6 @@ function startGame() {
     eventController = new EventController();
 
     Rubics.update();
-    drawInfoCanvas();
 }
 
 
@@ -80,7 +78,7 @@ var Rubics = {
         });
         document.body.appendChild(this.infoCanvas);
 
-        //chacks if game is restarted, adds event listener if not
+        //checks if game is restarted, adds event listener if not
         if(!eventController){
             document.addEventListener('keydown', function (event) {
                 eventController.handleKeyEvent(event);
@@ -92,11 +90,21 @@ var Rubics = {
         this.context.clearRect(0, 0, this.gameCanvas.width, this.gameCanvas.height);
     },
     update : function () {
+        var i, j;
         //draw surface
-        for (var i = 0; i < gameSize; i++) {
-            for (var j = 0; j < gameSize; j++) {
+        for (i = 0; i < gameSize; i++) {
+            for (j = 0; j < gameSize; j++) {
                 gameContext.fillStyle = surface[i][j].color;
                 gameContext.fillRect(surface[i][j].xPos, surface[i][j].yPos, surface[i][j].size, surface[i][j].size);
+            }
+        }
+
+        for(i = 0; i < gameSize; i++){
+            for(j = 0; j < gameSize; j++){
+                if(surface[i][j].color != infoSuraface[i][j].color){
+                    break;
+                }
+                alert("Aferim amk işsizi.");
             }
         }
 
