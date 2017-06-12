@@ -115,7 +115,7 @@ var Rubics = {
             }
 
             if(gameFinished){
-                if(confirm("Aferim amk işsizi. Restart?")){
+                if(confirm("Good Job! Restart?")){
                     infoSurface.clearSurface();
                     startGame();
                 }else{
