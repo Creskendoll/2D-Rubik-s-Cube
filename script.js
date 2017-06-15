@@ -13,8 +13,6 @@ var gameMenu;
 
 var gameSize;
 
-var currentGame;
-
 var canvasSize = 630;
 var gameContext;
 function startGame() {
@@ -33,7 +31,6 @@ function startGame() {
     //initialise game variables
     gameSize = Number(document.getElementById("gameSize")
         .options[document.getElementById("gameSize").selectedIndex].value);
-    currentGame = gameSize;
 
     difficulty = document.getElementById("difficulty")
         .options[document.getElementById("difficulty").selectedIndex].innerHTML;

@@ -7,9 +7,10 @@
         document.getElementById("resumeButton").style.display = 'none';
     }
     function selectionChanged(){
-        var el = document.getElementById("gameSize");
-        gameSize = Number(el.options[el.selectedIndex].value);
-	    if(gameSize == currentGame){
+        let sizeSelector = document.getElementById("gameSize");
+		let difficultySelector = document.getElementById("difficulty");
+	    if(gameSize == Number(sizeSelector.options[sizeSelector.selectedIndex].value) &&
+	    			difficulty == difficultySelector.options[difficultySelector.selectedIndex].innerHTML){
             document.getElementById("startButton").value = "Restart";
             document.getElementById("resumeButton").style.display = 'inline';
         }else{
