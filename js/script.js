@@ -78,12 +78,9 @@ var Rubics = {
         this.infoCanvas.style.border = "1px solid";
         this.infoCanvas.style.position = 'absolute';
         this.infoCanvas.style.left = canvasSize+80 + "px";
-        this.infoCanvas.addEventListener('mouseover', function () {
-
-        });
         document.body.appendChild(this.infoCanvas);
 
-        //checks if game is restarted, adds event listener if not
+        //adds event listener if game is not restarted
         if(!eventController){
             document.addEventListener('keydown', function (event) {
                 eventController.handleKeyEvent(event);
@@ -194,4 +191,8 @@ function gameFinished(){
         }
     }
     return true;
+}
+
+function setGameSize(sizeButton){
+    gameSize = Number(sizeButton.value);
 }

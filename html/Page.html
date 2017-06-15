@@ -1,7 +1,7 @@
 <html>
 <meta charset="UTF-8">
 <head>
-	<title>Main Page</title>
+	<title>Rubics</title>
 
 		<div id="gameMan">
 			<h2>Use the arrow keys to navigate around the board and "WASD" keys to move the row and columns.</h2>
@@ -26,19 +26,26 @@
 	}
 	</script>
 
-	<script src="bower_components/file-saver/FileSaver.js"></script>
+	<script src="../bower_components/file-saver/FileSaver.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body onload="hideBut()">
 	<table id="gameMenu" cellspacing="2" cellpadding="2">
 		<tr>
 			<td align="right">Game Size</td>
 			<td>
-				<select id="gameSize" onchange="selectionChanged()">
+			<div class="sizeButtons">
+			<button id="three" onclick="setGameSize(this)" value=3></button>
+			<button id="four" onclick="setGameSize(this)" value=4></button>
+			<button id="five" onclick="setGameSize(this)" value=5></button>
+			<button id="six" onclick="setGameSize(this)" value=6></button>
+			</div>
+				<!--<select id="gameSize" onchange="selectionChanged()">
 					<option value=3>3</option>
 					<option value=4>4</option>
 					<option value=5>5</option>
 					<option value=6>6</option>
-				</select>
+				</select>-->
 			</td>
 		</tr>
 
@@ -55,6 +62,7 @@
 		</tr>
 
 		<tr>
+		
 			<td align="right">Difficulty</td>
 			<td>
 				<select id="difficulty" onchange="selectionChanged()">
@@ -64,6 +72,7 @@
 					<option>Expert</option>
 				</select>
 			</td>
+		
 		</tr>
 		<tr>
 			<script type="text/javascript">
@@ -89,15 +98,15 @@
 					}
                 }
 			</script>
-			<td align="right"><input id="resumeButton" type="button" value="Resume" onclick="resumeGame()"/></td>
-			<td><input id="startButton" type="button" value="Start" onclick="startGame()"/></td>
+			<td align="right"><button id="resumeButton" onclick="resumeGame()"><span>Resume</span></button></td>
+			<td><button id="startButton" onclick="startGame()"><span>Start</span></button></td>
 		</tr>
 
 	</table>
 
-    <script type="text/javascript" src="InfoCanvas.js"></script>
-    <script type="text/javascript" src="script.js"></script>
-	<script type="text/javascript" src="EventController.js"></script>
-	<script type="text/javascript" src="Selector.js"></script>
+    <script type="text/javascript" src="../js/InfoCanvas.js"></script>
+    <script type="text/javascript" src="../js/script.js"></script>
+	<script type="text/javascript" src="../js/EventController.js"></script>
+	<script type="text/javascript" src="../js/Selector.js"></script>
 </body>
 </html>
