@@ -14,8 +14,13 @@ function EventController() {
                             selector.indexX = gameSize-1;
                             selector.outOfMap = true;
                         }
+                        if(selectorSpeed != 0){
                         movement = setInterval(function(){
                             selector.move(event.keyCode, selector.xPosArr[selector.indexX])}, 1);
+                        }else{
+                            selector.xPos = selector.xPosArr[selector.indexX];
+                            Rubics.update();
+                        }
                         break;
                     //up
                     case 38:
@@ -24,8 +29,13 @@ function EventController() {
                             selector.indexY = gameSize-1;
                             selector.outOfMap = true;
                         }
+                        if(selectorSpeed != 0){
                         movement = setInterval(function(){
                             selector.move(event.keyCode, selector.yPosArr[selector.indexY])}, 1);
+                        }else{
+                            selector.yPos = selector.yPosArr[selector.indexY];
+                            Rubics.update();
+                        }
                         break;
                     //right
                     case 39:
@@ -34,8 +44,13 @@ function EventController() {
                             selector.indexX = 0;
                             selector.outOfMap = true;
                         }
+                        if(selectorSpeed != 0){
                         movement = setInterval(function(){
                             selector.move(event.keyCode, selector.xPosArr[selector.indexX])}, 1);
+                        }else{
+                            selector.xPos = selector.xPosArr[selector.indexX];
+                            Rubics.update();
+                        }
                         break;
                     //down
                     case 40:
@@ -44,8 +59,13 @@ function EventController() {
                             selector.indexY = 0;
                             selector.outOfMap = true;
                         }
+                        if(selectorSpeed != 0){
                         movement = setInterval(function(){
                             selector.move(event.keyCode, selector.yPosArr[selector.indexY])}, 1);
+                        }else{
+                            selector.yPos = selector.yPosArr[selector.indexY];
+                            Rubics.update();
+                        }
                         break;
                 }
             }
@@ -157,7 +177,6 @@ function gatherData(surface) {
 //surface grid movement functions, 0-up 1-down, 2-left, 3-right
 var gridMovements = [
     function moveGridUp(){
-        console.log("Up");
         let tempArr = new Array(gameSize);
         let tempGrid;
 
@@ -172,7 +191,6 @@ var gridMovements = [
         }
     },
     function moveGridDown(){
-        console.log("Down");
         let tempArr = new Array(gameSize);
 
         for(let i = 0; i < gameSize; i++){
@@ -188,7 +206,6 @@ var gridMovements = [
         }    
     },
     function moveGridLeft(){
-        console.log("Left");
         let tempArr = new Array(gameSize);
         let tempGrid; 
 
@@ -203,7 +220,6 @@ var gridMovements = [
         }
     },
     function moveGridRight(){
-        console.log("Right");
         let tempArr = new Array(gameSize); 
 
         for(let i = 0; i < gameSize; i++){

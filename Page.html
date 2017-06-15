@@ -2,6 +2,12 @@
 <meta charset="UTF-8">
 <head>
 	<title>Main Page</title>
+
+		<div id="gameMan">
+			<h2>Use the arrow keys to navigate around the board and "WASD" keys to move the row and columns.</h2>
+			<h2>Use "ESC" to return to this menu. Hit 'r' to save your board and try to make it.</h2>
+		</div>
+
 	<script type="text/javascript">
 	function hideBut() {
         document.getElementById("resumeButton").style.display = 'none';
@@ -19,14 +25,10 @@
         }
 	}
 	</script>
+
 	<script src="bower_components/file-saver/FileSaver.js"></script>
 </head>
 <body onload="hideBut()">
-<div id="gameMan">
-	<h2>Use the arrow keys to navigate around the board and "WASD" keys to move the row and columns.</h2>
-	<h2>Use "ESC" to return to this menu. Hit 'r' to save your board and try to make it.</h2>
-</div>
-
 	<table id="gameMenu" cellspacing="2" cellpadding="2">
 		<tr>
 			<td align="right">Game Size</td>
@@ -44,10 +46,10 @@
 			<td align="right">Selector Speed</td>
 			<td>
 				<select id="selSpeed">
-					<option value=2>2</option>
-					<option value=4>4</option>
-					<option value=6>6</option>
-					<option value=8>8</option>
+					<option value=2>Slow</option>
+					<option value=4>Medium</option>
+					<option value=8>Fast</option>
+					<option value=0>No Animation</option>
 				</select>
 			</td>
 		</tr>
@@ -68,10 +70,9 @@
 				//TODO:refurnish this, it's a shit structure
                 function resumeGame() {
                     document.getElementById("gameMan").style.display = 'none';
+                    let el = document.getElementById("gameSize");
 
-                    var el = document.getElementById("gameSize");
-                    gameSize = Number(el.options[el.selectedIndex].value);
-                    if(currentGame == gameSize){
+                    if(gameSize == Number(el.options[el.selectedIndex].value)){
                         //hide menu
                         gameMenu = document.getElementById("gameMenu");
                         gameMenu.style.display = 'none';
