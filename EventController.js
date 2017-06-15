@@ -83,43 +83,49 @@ function EventController() {
     };
 }
 
-
-
 function randomizeSurface() {
-    var selectorPos = [selector.xPos, selector.yPos];
+    var selectorPos = [selector.indexX, selector.indexY];
     switch (difficulty){
         case "Easy":
+        do{
             for(let i = 0; i < 3; i++){
-                selector.xPos = selector.xPosArr[Math.floor(Math.random() * gameSize)];
-                selector.yPos = selector.yPosArr[Math.floor(Math.random() * gameSize)];
+                selector.indexX = Math.floor(Math.random() * gameSize);
+                selector.indexY = Math.floor(Math.random() * gameSize);
                 gridMovements[Math.floor(Math.random() * 4)]();
+                console.log("X: " + selector.indexX + "Y: " + selector.indexY);
             }
-            selector.xPos = selectorPos[0]; selector.yPos = selectorPos[1];
+            selector.indexX = selectorPos[0]; selector.indexY = selectorPos[1];
+        }while(gameFinished());
         break;
         case "Medium":
+        do{
             for(let i = 0; i < 5; i++){
-                selector.xPos = selector.xPosArr[Math.floor(Math.random() * gameSize)];
-                selector.yPos = selector.yPosArr[Math.floor(Math.random() * gameSize)];
-                console.log("X: " + selector.xPos + "Y: " + selector.yPos);
+                selector.indexX = Math.floor(Math.random() * gameSize);
+                selector.indexY = Math.floor(Math.random() * gameSize);
                 gridMovements[Math.floor(Math.random() * 4)]();
             }
-            selector.xPos = selectorPos[0]; selector.yPos = selectorPos[1];
+            selector.indexX = selectorPos[0]; selector.indexY = selectorPos[1];
+        }while(gameFinished());
         break;
         case "Hard":
+        do{
             for(let i = 0; i < 10; i++){
-                selector.xPos = selector.xPosArr[Math.floor(Math.random() * gameSize)];
-                selector.yPos = selector.yPosArr[Math.floor(Math.random() * gameSize)];
+                selector.indexX = Math.floor(Math.random() * gameSize);
+                selector.indexY = Math.floor(Math.random() * gameSize);
                 gridMovements[Math.floor(Math.random() * 4)]();
             }
-            selector.xPos = selectorPos[0]; selector.yPos = selectorPos[1];
+            selector.indexX = selectorPos[0]; selector.indexY = selectorPos[1];
+        }while(gameFinished());
         break;
         case "Expert":
+        do{
             for(let i = 0; i < 15; i++){
-                selector.xPos = selector.xPosArr[Math.floor(Math.random() * gameSize)];
-                selector.yPos = selector.yPosArr[Math.floor(Math.random() * gameSize)];
+                selector.indexX = Math.floor(Math.random() * gameSize);
+                selector.indexY = Math.floor(Math.random() * gameSize);
                 gridMovements[Math.floor(Math.random() * 4)]();
             }
-            selector.xPos = selectorPos[0]; selector.yPos = selectorPos[1];
+            selector.indexX = selectorPos[0]; selector.indexY = selectorPos[1];
+        }while(gameFinished());
         break;
     }
 

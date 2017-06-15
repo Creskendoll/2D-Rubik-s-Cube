@@ -107,19 +107,8 @@ var Rubics = {
             }
         }
 
-        var gameFinished = true;
-       if(infoSurface.infoSurface != -1){
-            for(i = 0; i < gameSize; i++){
-                for(j = 0; j < gameSize; j++){
-                    if(surface[i][j].color != goalSurface[i][j].color){
-                        i = gameSize;
-                        gameFinished = false;
-                        break;
-                    }
-                }
-            }
-
-            if(gameFinished){
+        if(infoSurface.infoSurface != -1){
+            if(gameFinished()){
                 if(confirm("Good Job! Restart?")){
                     infoSurface.clearSurface();
                     startGame();
@@ -197,4 +186,15 @@ function Grid(color, xPos, yPos) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.color = color;
+}
+
+function gameFinished(){
+    for(i = 0; i < gameSize; i++){
+        for(j = 0; j < gameSize; j++){
+            if(surface[i][j].color != goalSurface[i][j].color){
+                return false;
+            }
+        }
+    }
+    return true;
 }
