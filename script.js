@@ -1,6 +1,7 @@
 var surface;
 var infoSurface;
 var goalSurface;
+var difficulty;
 
 var selector;
 var selectorSpeed;
@@ -30,17 +31,21 @@ function startGame() {
     Rubics.infoCanvas.style.display = 'inline';
 
     //initialise game variables
-    var el = document.getElementById("gameSize");
-    gameSize = Number(el.options[el.selectedIndex].value);
-
+    gameSize = Number(document.getElementById("gameSize")
+        .options[document.getElementById("gameSize").selectedIndex].value);
     currentGame = gameSize;
 
-    el = document.getElementById("selSpeed");
-    selectorSpeed = Number(el.options[el.selectedIndex].value);
+    difficulty = document.getElementById("difficulty")
+        .options[document.getElementById("difficulty").selectedIndex].innerHTML;
 
+    selectorSpeed = Number(document.getElementById("selSpeed")
+        .options[document.getElementById("selSpeed").selectedIndex].value);
+
+    //initialize game elements
     selector = new Selector();
     infoSurface = new InfoCanvas();
 
+    //initialize the game
     Rubics.start();
 
     gameContext = Rubics.context;

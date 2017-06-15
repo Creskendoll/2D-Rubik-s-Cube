@@ -50,57 +50,18 @@ function EventController() {
                 }
             }
         }else{
-            var tempArr = new Array(gameSize);
-            var tempGrid;
-            var i = 0;
-
             switch (event.key){
                 case "w":
-                    for(i = 0; i < gameSize; i++){
-                        tempArr[i] = surface[selector.indexX][i];
-                    }
-
-                    for(i = 0; i < gameSize; i++){
-                        tempGrid = tempArr[(i+1)%(gameSize)];
-                        surface[selector.indexX][i] = new Grid(tempGrid.color,
-                            tempArr[i].xPos, tempArr[i].yPos);
-                    }
+                    gridMovements[0]();
                     break;
                 case "s":
-                    for(i = 0; i < gameSize; i++){
-                        tempArr[i] = surface[selector.indexX][i];
-                    }
-
-                    surface[selector.indexX][0] = new Grid(tempArr[gameSize-1].color, tempArr[0].xPos, tempArr[0].yPos);
-
-                    for(i = 1; i < gameSize; i++){
-                        surface[selector.indexX][i] = new Grid(tempArr[i-1].color, tempArr[i].xPos, tempArr[i].yPos);
-                    }
+                    gridMovements[1]();
                     break;
                 case "a":
-                    //vertical array, WORKS
-                    for(i = 0; i < gameSize; i++){
-                        tempArr[i] = surface[i][selector.indexY];
-                    }
-
-                    //swaps the places as needed but doesn't update surface
-                    for(i = 0; i < gameSize; i++){
-                        tempGrid = tempArr[(i+1)%(gameSize)];
-                        surface[i][selector.indexY] = new Grid(tempGrid.color,
-                            tempArr[i].xPos, tempArr[i].yPos);
-                    }
+                    gridMovements[2]();
                     break;
                 case "d":
-                    for(i = 0; i < gameSize; i++){
-                        tempArr[i] = surface[i][selector.indexY];
-                    }
-
-                    surface[0][selector.indexY] = new Grid(tempArr[gameSize-1].color, tempArr[0].xPos, tempArr[0].yPos);
-                   // console.log(surface[0][selector.indexY]);
-
-                    for(i = 1; i < gameSize; i++){
-                        surface[i][selector.indexY] = new Grid(tempArr[i-1].color, tempArr[i].xPos, tempArr[i].yPos);
-                    }
+                    gridMovements[3]();
                     break;
                 case "r":
                     infoSurface.drawInfoSurface();
@@ -122,8 +83,48 @@ function EventController() {
     };
 }
 
+
+
 function randomizeSurface() {
-    for(var i = 0; i < gameSize; i++){
+    var selectorPos = [selector.xPos, selector.yPos];
+    switch (difficulty){
+        case "Easy":
+            for(let i = 0; i < 3; i++){
+                selector.xPos = selector.xPosArr[Math.floor(Math.random() * gameSize)];
+                selector.yPos = selector.yPosArr[Math.floor(Math.random() * gameSize)];
+                gridMovements[Math.floor(Math.random() * 4)]();
+            }
+            selector.xPos = selectorPos[0]; selector.yPos = selectorPos[1];
+        break;
+        case "Medium":
+            for(let i = 0; i < 5; i++){
+                selector.xPos = selector.xPosArr[Math.floor(Math.random() * gameSize)];
+                selector.yPos = selector.yPosArr[Math.floor(Math.random() * gameSize)];
+                console.log("X: " + selector.xPos + "Y: " + selector.yPos);
+                gridMovements[Math.floor(Math.random() * 4)]();
+            }
+            selector.xPos = selectorPos[0]; selector.yPos = selectorPos[1];
+        break;
+        case "Hard":
+            for(let i = 0; i < 10; i++){
+                selector.xPos = selector.xPosArr[Math.floor(Math.random() * gameSize)];
+                selector.yPos = selector.yPosArr[Math.floor(Math.random() * gameSize)];
+                gridMovements[Math.floor(Math.random() * 4)]();
+            }
+            selector.xPos = selectorPos[0]; selector.yPos = selectorPos[1];
+        break;
+        case "Expert":
+            for(let i = 0; i < 15; i++){
+                selector.xPos = selector.xPosArr[Math.floor(Math.random() * gameSize)];
+                selector.yPos = selector.yPosArr[Math.floor(Math.random() * gameSize)];
+                gridMovements[Math.floor(Math.random() * 4)]();
+            }
+            selector.xPos = selectorPos[0]; selector.yPos = selectorPos[1];
+        break;
+    }
+
+    //complete randomization
+    /*for(var i = 0; i < gameSize; i++){
         for(var j = 0; j < gameSize; j++){
             var randI = Math.floor(Math.random() * gameSize);
             var randJ = Math.floor(Math.random() * gameSize);
@@ -135,7 +136,7 @@ function randomizeSurface() {
                 j--;
             }
         }
-    }
+    }*/
 }
 
 //this is for gathering data from the game board and saving it on the local machine
@@ -147,3 +148,66 @@ function gatherData(surface) {
     }
 }
 
+//surface grid movement functions, 0-up 1-down, 2-left, 3-right
+var gridMovements = [
+    function moveGridUp(){
+        console.log("Up");
+        let tempArr = new Array(gameSize);
+        let tempGrid;
+
+        for(let i = 0; i < gameSize; i++){
+            tempArr[i] = surface[selector.indexX][i];
+        }
+
+        for(let i = 0; i < gameSize; i++){
+            tempGrid = tempArr[(i+1)%(gameSize)];
+            surface[selector.indexX][i] = new Grid(tempGrid.color,
+            tempArr[i].xPos, tempArr[i].yPos);
+        }
+    },
+    function moveGridDown(){
+        console.log("Down");
+        let tempArr = new Array(gameSize);
+
+        for(let i = 0; i < gameSize; i++){
+            tempArr[i] = surface[selector.indexX][i];
+        }
+
+        surface[selector.indexX][0] = new Grid(tempArr[gameSize-1].color,
+        tempArr[0].xPos, tempArr[0].yPos);
+
+        for(let i = 1; i < gameSize; i++){
+            surface[selector.indexX][i] = new Grid(tempArr[i-1].color, 
+            tempArr[i].xPos, tempArr[i].yPos);
+        }    
+    },
+    function moveGridLeft(){
+        console.log("Left");
+        let tempArr = new Array(gameSize);
+        let tempGrid; 
+
+        for(let i = 0; i < gameSize; i++){
+            tempArr[i] = surface[i][selector.indexY];
+        }
+
+        for(let i = 0; i < gameSize; i++){
+            tempGrid = tempArr[(i+1)%(gameSize)];
+            surface[i][selector.indexY] = new Grid(tempGrid.color,
+            tempArr[i].xPos, tempArr[i].yPos);
+        }
+    },
+    function moveGridRight(){
+        console.log("Right");
+        let tempArr = new Array(gameSize); 
+
+        for(let i = 0; i < gameSize; i++){
+            tempArr[i] = surface[i][selector.indexY];
+        }
+
+        surface[0][selector.indexY] = new Grid(tempArr[gameSize-1].color, tempArr[0].xPos, tempArr[0].yPos);
+        
+        for(let i = 1; i < gameSize; i++){
+            surface[i][selector.indexY] = new Grid(tempArr[i-1].color, tempArr[i].xPos, tempArr[i].yPos);
+        }
+    }
+]
