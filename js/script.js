@@ -176,6 +176,7 @@ function Grid(color, xPos, yPos) {
     this.color = color;
 }
 
+//checks if game is finished
 function gameFinished(){
     for(i = 0; i < gameSize; i++){
         for(j = 0; j < gameSize; j++){
@@ -187,6 +188,7 @@ function gameFinished(){
     return true;
 }
 
+//called on button click
 function setGameSize(toggleButton){
     let buttons = document.getElementsByClassName("toggleButton"); 
     let val = toggleButton.attributes["value"].value;
@@ -204,15 +206,40 @@ function setGameSize(toggleButton){
     }
 }
 
-function setSelectorSpeed(toggleButton){
+//called on button click
+function setSelectorSpeed(toggleButton, selectedIndex){
+    if(toggleButton.attributes["selected"].value == "false"){
+    clearInterval(menuSelectorMovement);
+    let img = new Image();
+    img.src = "../res/check.png";
+    img.onload = function() {
+    toggleButton.getContext("2d").drawImage(img, 64,0,128,128);
+    };
     selectorSpeed = Number(toggleButton.attributes["value"].value);
-    console.log(selectorSpeed);
+    toggleButton.attributes["selected"].value = "true";
+    }else{
+        selectorSpeed = null;
+        toggleButton.attributes["selected"].value = "false";
+        Menu.clear(selectedIndex);
+        Menu.update(selectedIndex);
+    }
 }
 
-function animateMenuSelectorGrid(selectedIndex){
+//called on mouse hover
+function animateMenuSelectorGrid(toggleButton, selectedIndex){
+    if(toggleButton.attributes["selected"].value == "false"){
     Menu.initMovement(Number(selectedIndex));
+    }
 }
 
+//called on mouse exit
+function resetAnimatedCanvas(toggleButton, selectedIndex) {
+    if(toggleButton.attributes["selected"].value == "false"){
+    Menu.reset(selectedIndex);
+    }
+}
+
+//called on body load
 function initMenu() {
     var selectorCanvasArr = document.getElementsByClassName("animatedCanvas");
     for(let i = 0; i < selectorCanvasArr.length; i++){

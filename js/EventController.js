@@ -90,10 +90,10 @@ function EventController() {
                     saveAs(file);*/
                     break;
                 case "Escape":
-                    document.getElementById("gameMan").style.display = 'initial';
+                    document.getElementById("gameMan").style.display = 'inline-block';
                     Rubics.gameCanvas.style.display = 'none';
                     Rubics.infoCanvas.style.display = 'none';
-                    gameMenu.style.display = 'initial';
+                    gameMenu.style.display = 'inline-block';
                     document.getElementById("startButton").value = "Restart";
                     break;
             }

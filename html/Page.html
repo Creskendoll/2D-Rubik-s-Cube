@@ -30,7 +30,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body onload="hideBut(); initMenu();">
-	<table id="gameMenu" cellspacing="2" cellpadding="2">
+	<table id="gameMenu">
 		<tr>
 			<td align="center">Game Size</td>
 			<td>
@@ -60,16 +60,20 @@
 			<td>
 			<div class="speedButtons">
 				<div class="animatedContainer">
-					<canvas class="animatedCanvas" value="2" onmouseover="animateMenuSelectorGrid(0);" onclick="setSelectorSpeed(this)">
+					<canvas class="animatedCanvas" selected="false" value="2" onmouseout="resetAnimatedCanvas(this, 0)" 
+						onmouseover="animateMenuSelectorGrid(this, 0);" onclick="setSelectorSpeed(this, 0)">
 				</div>
 				<div class="animatedContainer">
-					<canvas class="animatedCanvas" value="4" onmouseover="animateMenuSelectorGrid(1);" onclick="setSelectorSpeed(this)">
+					<canvas class="animatedCanvas" selected="false" value="4" onmouseout="resetAnimatedCanvas(this, 1)"
+						onmouseover="animateMenuSelectorGrid(this, 1);" onclick="setSelectorSpeed(this, 1)">
 				</div>
 				<div class="animatedContainer">
-					<canvas class="animatedCanvas" value="8" onmouseover="animateMenuSelectorGrid(2);" onclick="setSelectorSpeed(this)">
+					<canvas class="animatedCanvas" selected="false" value="8" onmouseout="resetAnimatedCanvas(this, 2)"
+						onmouseover="animateMenuSelectorGrid(this, 2);" onclick="setSelectorSpeed(this, 2)">
 				</div>
 				<div class="animatedContainer">
-					<canvas class="animatedCanvas" value="0" onmouseover="animateMenuSelectorGrid(3);" onclick="setSelectorSpeed(this)">
+					<canvas class="animatedCanvas" selected="false" value="0" onmouseout="resetAnimatedCanvas(this, 3)" 
+						onmouseover="animateMenuSelectorGrid(this, 3);" onclick="setSelectorSpeed(this, 3)">
 				</div>
 			</div>
 			</td>

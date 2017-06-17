@@ -89,8 +89,6 @@ function Selector(canvasSize, gameSize) {
         }
         Rubics.clear();
         Rubics.update();
-
-       // console.log("Selector X: " + this.indexX, "Selector Y: " + this.indexY);
     }
 
     this.moveInMenu = function(selectorSpeed, selectedIndex){

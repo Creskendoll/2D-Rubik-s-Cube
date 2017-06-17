@@ -52,6 +52,12 @@ var Menu = {
          contextArr[selectedIndex].clearRect(0, 0, 192, 128);
     },
     reset : function(selectedIndex) {
+        let sels = this.selectors;
+        let contextArr = this.animatedContextArr;
 
+        clearInterval(menuSelectorMovement);
+        sels[selectedIndex].xPos = 64;
+        Menu.clear(selectedIndex);
+        Menu.update(selectedIndex);
     }
 }
