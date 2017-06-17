@@ -35,10 +35,22 @@
 			<td align="right">Game Size</td>
 			<td>
 			<div class="sizeButtons">
-			<button id="three" onclick="setGameSize(this)" value=3></button>
-			<button id="four" onclick="setGameSize(this)" value=4></button>
-			<button id="five" onclick="setGameSize(this)" value=5></button>
-			<button id="six" onclick="setGameSize(this)" value=6></button>
+				<div class="overlay border">
+					<div class="insideText" id="three">3 X 3</div>
+					<img src="../res/grid3.png" class="toggleButton" value="3" onclick="setGameSize(this)"></img>
+				</div>
+				<div class="overlay">
+					<div class="insideText" id="four">4 X 4</div>
+					<img src="../res/grid4.png" class="toggleButton" value="4" onclick="setGameSize(this)"></img>
+				</div>
+				<div class="overlay">
+					<div class="insideText" id="five">5 X 5</div>
+					<img src="../res/grid5.png" class="toggleButton" value="5" onclick="setGameSize(this)"></img>
+				</div>
+				<div class="overlay">
+					<div class="insideText" id="six">6 X 6</div>
+					<img src="../res/grid6.png" class="toggleButton" value="6" onclick="setGameSize(this)"></img>
+				</div>
 			</div>
 				<!--<select id="gameSize" onchange="selectionChanged()">
 					<option value=3>3</option>

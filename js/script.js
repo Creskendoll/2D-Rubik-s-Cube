@@ -29,9 +29,6 @@ function startGame() {
     Rubics.infoCanvas.style.display = 'inline';
 
     //initialise game variables
-    gameSize = Number(document.getElementById("gameSize")
-        .options[document.getElementById("gameSize").selectedIndex].value);
-
     difficulty = document.getElementById("difficulty")
         .options[document.getElementById("difficulty").selectedIndex].innerHTML;
 
@@ -193,6 +190,19 @@ function gameFinished(){
     return true;
 }
 
-function setGameSize(sizeButton){
-    gameSize = Number(sizeButton.value);
+function setGameSize(toggleButton){
+    let buttons = document.getElementsByClassName("toggleButton"); 
+    let val = toggleButton.attributes["value"].value;
+    
+    for(let i = 0; i < buttons.length; i++){
+        if(buttons[i] !== toggleButton){
+            buttons[i].src = "../res/grid" + buttons[i].attributes["value"].value + ".png"
+        }else if(toggleButton.src == "file:///home/ken/Documents/javascript/Rubics/res/check.png"){
+            toggleButton.src = "../res/grid" + val + ".png";
+            gameSize = null;
+        }else{
+            toggleButton.src = "../res/check.png";
+            gameSize = val;
+        }
+    }
 }

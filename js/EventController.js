@@ -148,21 +148,6 @@ function randomizeSurface() {
         }while(gameFinished());
         break;
     }
-
-    //complete randomization
-    /*for(var i = 0; i < gameSize; i++){
-        for(var j = 0; j < gameSize; j++){
-            var randI = Math.floor(Math.random() * gameSize);
-            var randJ = Math.floor(Math.random() * gameSize);
-            if(randJ != j && randI != i){
-                var tempColor = surface[i][j].color;
-                surface[i][j].color = surface[randI][randJ].color;
-                surface[randI][randJ].color = tempColor;
-            }else{
-                j--;
-            }
-        }
-    }*/
 }
 
 //this is for gathering data from the game board and saving it on the local machine
