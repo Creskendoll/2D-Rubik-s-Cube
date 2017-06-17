@@ -29,10 +29,10 @@
 	<script src="../bower_components/file-saver/FileSaver.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
-<body onload="hideBut()">
+<body onload="hideBut(); initMenu();">
 	<table id="gameMenu" cellspacing="2" cellpadding="2">
 		<tr>
-			<td align="right">Game Size</td>
+			<td align="center">Game Size</td>
 			<td>
 			<div class="sizeButtons">
 				<div class="overlay border">
@@ -52,30 +52,31 @@
 					<img src="../res/grid6.png" class="toggleButton" value="6" onclick="setGameSize(this)"></img>
 				</div>
 			</div>
-				<!--<select id="gameSize" onchange="selectionChanged()">
-					<option value=3>3</option>
-					<option value=4>4</option>
-					<option value=5>5</option>
-					<option value=6>6</option>
-				</select>-->
 			</td>
 		</tr>
 
 		<tr>
-			<td align="right">Selector Speed</td>
+			<td align="center">Selector Speed</td>
 			<td>
-				<select id="selSpeed">
-					<option value=2>Slow</option>
-					<option value=4>Medium</option>
-					<option value=8>Fast</option>
-					<option value=0>No Animation</option>
-				</select>
+			<div class="speedButtons">
+				<div class="animatedContainer">
+					<canvas class="animatedCanvas" value="2" onmouseover="animateMenuSelectorGrid(0);" onclick="setSelectorSpeed(this)">
+				</div>
+				<div class="animatedContainer">
+					<canvas class="animatedCanvas" value="4" onmouseover="animateMenuSelectorGrid(1);" onclick="setSelectorSpeed(this)">
+				</div>
+				<div class="animatedContainer">
+					<canvas class="animatedCanvas" value="8" onmouseover="animateMenuSelectorGrid(2);" onclick="setSelectorSpeed(this)">
+				</div>
+				<div class="animatedContainer">
+					<canvas class="animatedCanvas" value="0" onmouseover="animateMenuSelectorGrid(3);" onclick="setSelectorSpeed(this)">
+				</div>
+			</div>
 			</td>
 		</tr>
 
 		<tr>
-		
-			<td align="right">Difficulty</td>
+			<td align="center">Difficulty</td>
 			<td>
 				<select id="difficulty" onchange="selectionChanged()">
 					<option>Easy</option>
@@ -84,8 +85,8 @@
 					<option>Expert</option>
 				</select>
 			</td>
-		
 		</tr>
+
 		<tr>
 			<script type="text/javascript">
 				//TODO:refurnish this, it's a shit structure
@@ -110,12 +111,13 @@
 					}
                 }
 			</script>
-			<td align="right"><button id="resumeButton" onclick="resumeGame()"><span>Resume</span></button></td>
+			<td><button id="resumeButton" onclick="resumeGame()"><span>Resume</span></button></td>
 			<td><button id="startButton" onclick="startGame()"><span>Start</span></button></td>
 		</tr>
 
 	</table>
 
+	<script type="text/javascript" src="../js/MenuController.js"></script>
     <script type="text/javascript" src="../js/InfoCanvas.js"></script>
     <script type="text/javascript" src="../js/script.js"></script>
 	<script type="text/javascript" src="../js/EventController.js"></script>

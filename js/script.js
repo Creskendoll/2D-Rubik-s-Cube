@@ -13,7 +13,7 @@ var gameMenu;
 
 var gameSize;
 
-var canvasSize = 630;
+var canvasSize = 600;
 var gameContext;
 function startGame() {
     document.getElementById("gameMan").style.display = 'none';
@@ -32,11 +32,8 @@ function startGame() {
     difficulty = document.getElementById("difficulty")
         .options[document.getElementById("difficulty").selectedIndex].innerHTML;
 
-    selectorSpeed = Number(document.getElementById("selSpeed")
-        .options[document.getElementById("selSpeed").selectedIndex].value);
-
     //initialize game elements
-    selector = new Selector();
+    selector = new Selector(canvasSize, gameSize);
     infoSurface = new InfoCanvas();
 
     //initialize the game
@@ -193,7 +190,7 @@ function gameFinished(){
 function setGameSize(toggleButton){
     let buttons = document.getElementsByClassName("toggleButton"); 
     let val = toggleButton.attributes["value"].value;
-    
+
     for(let i = 0; i < buttons.length; i++){
         if(buttons[i] !== toggleButton){
             buttons[i].src = "../res/grid" + buttons[i].attributes["value"].value + ".png"
@@ -204,5 +201,40 @@ function setGameSize(toggleButton){
             toggleButton.src = "../res/check.png";
             gameSize = val;
         }
+    }
+}
+
+function setSelectorSpeed(toggleButton){
+    selectorSpeed = Number(toggleButton.attributes["value"].value);
+    console.log(selectorSpeed);
+}
+
+function animateMenuSelectorGrid(selectedIndex){
+    Menu.initMovement(Number(selectedIndex));
+}
+
+function initMenu() {
+    var selectorCanvasArr = document.getElementsByClassName("animatedCanvas");
+    for(let i = 0; i < selectorCanvasArr.length; i++){
+            selectorCanvasArr[i].height = 128;
+            selectorCanvasArr[i].width = 256;
+            selectorCanvasArr[i].position = 'absolute';
+            let selector = new Selector(128, 1);
+            let context = selectorCanvasArr[i].getContext("2d");
+
+            context.fillStyle = "red";
+            context.fillRect(0,0,128,128);
+            context.fillStyle = "blue";
+            context.fillRect(128,0,128,128);
+
+            //save the variables into the Menu object
+            Menu.selectors[i] = selector;
+            Menu.animatedContextArr[i] = context;
+
+            //draw selectors
+            context.fillStyle = selector.color;
+            context.beginPath();
+            context.arc(selector.xPos, selector.xPos, selector.radius-3, 0, 2 * Math.PI, false);
+            context.fill();
     }
 }

@@ -2,7 +2,7 @@
  * Created by ken on 06.06.2017.
  */
 //selector circle
-function Selector() {
+function Selector(canvasSize, gameSize) {
     this.xPos = canvasSize/(gameSize*2);
     this.yPos = canvasSize/(gameSize*2);
     var halfDistance = canvasSize/(gameSize*2);
@@ -91,5 +91,14 @@ function Selector() {
         Rubics.update();
 
        // console.log("Selector X: " + this.indexX, "Selector Y: " + this.indexY);
+    }
+
+    this.moveInMenu = function(selectorSpeed, selectedIndex){
+        this.xPos += selectorSpeed;
+        if(this.xPos == 192){
+            clearInterval(menuSelectorMovement);
+        }
+        Menu.clear(selectedIndex);
+        Menu.update(selectedIndex);
     }
 }
