@@ -28,10 +28,6 @@ function startGame() {
     Rubics.gameCanvas.style.display = 'inline';
     Rubics.infoCanvas.style.display = 'inline';
 
-    //initialise game variables
-    difficulty = document.getElementById("difficulty")
-        .options[document.getElementById("difficulty").selectedIndex].innerHTML;
-
     //initialize game elements
     selector = new Selector(canvasSize, gameSize);
     infoSurface = new InfoCanvas();
@@ -193,7 +189,8 @@ function setGameSize(toggleButton){
     let buttons = document.getElementsByClassName("toggleButton"); 
     let val = toggleButton.attributes["value"].value;
 
-    for(let i = 0; i < buttons.length; i++){
+    //TODO:fix this, it's not solid
+    for(let i = 0; i < 3; i++){
         if(buttons[i] !== toggleButton){
             buttons[i].src = "../res/grid" + buttons[i].attributes["value"].value + ".png"
         }else if(toggleButton.src == "file:///home/ken/Documents/javascript/Rubics/res/check.png"){
@@ -209,19 +206,49 @@ function setGameSize(toggleButton){
 //called on button click
 function setSelectorSpeed(toggleButton, selectedIndex){
     if(toggleButton.attributes["selected"].value == "false"){
-    clearInterval(menuSelectorMovement);
-    let img = new Image();
-    img.src = "../res/check.png";
-    img.onload = function() {
-    toggleButton.getContext("2d").drawImage(img, 64,0,128,128);
-    };
-    selectorSpeed = Number(toggleButton.attributes["value"].value);
-    toggleButton.attributes["selected"].value = "true";
+        for(let i = 0; i < 4; i++){
+            if(i != selectedIndex){
+                document.getElementsByClassName("animatedCanvas")[i]
+                    .attributes["selected"].value = "false";
+                Menu.reset(i);
+                Menu.clear(i);
+                Menu.update(i);
+            }
+        }
+        Menu.selectors[selectedIndex].xPos = 192;
+        Menu.clear(selectedIndex);
+        Menu.update(selectedIndex);
+        clearInterval(menuSelectorMovement);
+        let img = new Image();
+        img.src = "../res/check.png";
+        img.onload = function() {
+        toggleButton.getContext("2d").drawImage(img, 64,0,128,128);
+        };
+        selectorSpeed = Number(toggleButton.attributes["value"].value);
+        toggleButton.attributes["selected"].value = "true";
     }else{
         selectorSpeed = null;
         toggleButton.attributes["selected"].value = "false";
         Menu.clear(selectedIndex);
         Menu.update(selectedIndex);
+    }
+}
+
+function setDifficulty(toggleButton){
+    let dif = toggleButton.attributes["value"].value;
+    let diffButtons = document.getElementsByClassName("toggleButton");
+
+    //TODO:fix this, it's not solid
+    for(let i = 4; i < diffButtons.length; i++){
+        if(diffButtons[i] !== toggleButton){
+            diffButtons[i].src = "../res/smiley" + diffButtons[i].attributes["value"].value + ".png"
+        }else if(toggleButton.src == "file:///home/ken/Documents/javascript/Rubics/res/check.png"){
+            toggleButton.src = "../res/smiley" + dif + ".png";
+            difficulty = null;
+        }else{
+            difficulty = dif;
+            toggleButton.src = "../res/check.png";
+        }
     }
 }
 

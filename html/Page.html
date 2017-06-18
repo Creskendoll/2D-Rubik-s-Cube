@@ -82,12 +82,23 @@
 		<tr>
 			<td align="center">Difficulty</td>
 			<td>
-				<select id="difficulty" onchange="selectionChanged()">
-					<option>Easy</option>
-					<option>Medium</option>
-					<option>Hard</option>
-					<option>Expert</option>
-				</select>
+			<div class="difficultyButtons">
+				<div class="overlay first">
+					<div class="difficultyText">Easy</div>
+					<img src="../res/smileyEasy.png" class="toggleButton" value="Easy" onclick="setDifficulty(this)"></img>
+				</div>
+				<div class="overlay">
+					<div class="difficultyText">Medium</div>
+					<img src="../res/smileyMedium.png" class="toggleButton" value="Medium" onclick="setDifficulty(this)"></img>
+				</div>
+				<div class="overlay">
+					<div class="difficultyText">Hard</div>
+					<img src="../res/smileyHard.png" class="toggleButton" value="Hard" onclick="setDifficulty(this)"></img>
+				</div>
+				<div class="overlay">
+					<div class="difficultyText">Expert</div>
+					<img src="../res/smileyExpert.png" class="toggleButton" value="Expert" onclick="setDifficulty(this)"></img>
+				</div>				
 			</td>
 		</tr>
 

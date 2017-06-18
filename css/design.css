@@ -1,7 +1,10 @@
+/*merge all of this into similar elements some time*/
+
 button {
 	border-radius: 8px;
 	height: 50px;
 	width: 150px;
+	cursor: pointer;
 }
 
 div.animatedContainer {
@@ -23,6 +26,57 @@ table, td{
 td {
 	font-size: 30px;
 	font-family: Arial, Helvetica, sans-serif;
+}
+
+.difficultyButtons div {
+	float: left;
+	margin-left: 30px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.difficultyButtons img {
+	backface-visibility: hidden;
+	opacity: 1;
+	transition: .3s ease;
+	float: left;
+	height: 128px;
+	width: 128px;
+	background-repeat: no-repeat;
+	position: relative;
+}
+
+div.difficultyText {
+	color: black;
+	backface-visibility: hidden;
+	opacity: 0;
+	transition: .3s ease;
+	font-size: 30px;
+	font-family: Arial, Helvetica, sans-serif;
+	line-height:128px;
+	margin: auto;
+	text-align: center;
+	height: 128px;
+	width: 128px;
+	position: absolute;
+}
+
+div.first {
+	margin-left: 10px;
+}
+
+.overlay:hover div.difficultyText {
+	opacity: 1;
+}
+
+.sizeButtons img {
+	opacity: 1;
+	transition: .3s ease;
+	float: left;
+	height: 128px;
+	width: 128px;
+	background-repeat: no-repeat;
+	position: relative;
 }
 
 .sizeButtons div{
@@ -73,16 +127,6 @@ div.border {
 
 .overlay:hover div.insideText{
 	opacity: 1;
-}
-
-.sizeButtons img {
-	opacity: 1;
-	transition: .3s ease;
-	float: left;
-	height: 128px;
-	width: 128px;
-	background-repeat: no-repeat;
-	position: relative;
 }
 
 div.insideText {
