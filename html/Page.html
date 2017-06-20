@@ -2,28 +2,11 @@
 <meta charset="UTF-8">
 <head>
 	<title>Rubics</title>
-
-		<div id="gameMan">
-			<h2>Use the arrow keys to navigate around the board and "WASD" keys to move the row and columns.</h2>
-			<h2>Use "ESC" to return to this menu. Hit 'r' to save your board and try to make it.</h2>
-		</div>
-
 	<script type="text/javascript">
 	function hideBut() {
         document.getElementById("resumeButton").style.display = 'none';
+		document.getElementById("gameMan").style.display = 'none';
     }
-    function selectionChanged(){
-        let sizeSelector = document.getElementById("gameSize");
-		let difficultySelector = document.getElementById("difficulty");
-	    if(gameSize == Number(sizeSelector.options[sizeSelector.selectedIndex].value) &&
-	    			difficulty == difficultySelector.options[difficultySelector.selectedIndex].innerHTML){
-            document.getElementById("startButton").value = "Restart";
-            document.getElementById("resumeButton").style.display = 'inline';
-        }else{
-            document.getElementById("startButton").value = "Start";
-            document.getElementById("resumeButton").style.display = 'none';
-        }
-	}
 	</script>
 
 	<script src="../bower_components/file-saver/FileSaver.js"></script>
@@ -32,7 +15,7 @@
 <body onload="hideBut(); initMenu();">
 	<table id="gameMenu">
 		<tr>
-			<td align="center">Game Size</td>
+			<td class="blinkingDiv" id="sizeDiv" align="center">Game Size</td>
 			<td>
 			<div class="sizeButtons">
 				<div class="overlay border">
@@ -56,7 +39,7 @@
 		</tr>
 
 		<tr>
-			<td align="center">Selector Speed</td>
+			<td class="blinkingDiv" id="speedDiv" align="center">Selector Speed</td>
 			<td>
 			<div class="speedButtons">
 				<div class="animatedContainer">
@@ -80,7 +63,7 @@
 		</tr>
 
 		<tr>
-			<td align="center">Difficulty</td>
+			<td class="blinkingDiv" id="diffDiv" align="center">Difficulty</td>
 			<td>
 			<div class="difficultyButtons">
 				<div class="overlay first">
@@ -126,12 +109,22 @@
 					}
                 }
 			</script>
-			<td><button id="resumeButton" onclick="resumeGame()"><span>Resume</span></button></td>
-			<td><button id="startButton" onclick="startGame()"><span>Start</span></button></td>
+			<td><button id="help" onclick="showHelp()">Help</button></td>
+			<td>
+				<button id="resumeButton" onclick="resumeGame()">
+					<span>Resume</span>
+				</button>
+				<button id="startButton" onmouseout="resetButtonColor(this)" onmouseover="changeButtonColor(this)" onclick="startGame()">
+					<span>Start</span>
+				</button>
+			</td>
 		</tr>
 
 	</table>
-
+		<div id="gameMan">
+			<h3>Use the arrow keys to navigate around the board and "WASD" keys to move the row and columns.</h3>
+			<h3>Hit 'r' to save your board and try to make it. Use "ESC" to return to this menu.</h3>
+		</div>
 	<script type="text/javascript" src="../js/MenuController.js"></script>
     <script type="text/javascript" src="../js/InfoCanvas.js"></script>
     <script type="text/javascript" src="../js/script.js"></script>

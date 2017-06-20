@@ -1,21 +1,24 @@
 var surface;
 var infoSurface;
 var goalSurface;
-var difficulty;
+var difficulty = null;
 
 var selector;
-var selectorSpeed;
+var selectorSpeed = null;
 
 var movement;
+var blinkInterval = false;
+var blinkCount = 0;
 var eventController;
 
 var gameMenu;
 
-var gameSize;
+var gameSize = null;
 
 var canvasSize = 600;
 var gameContext;
 function startGame() {
+    if(Menu.checkMenu() == true){
     document.getElementById("gameMan").style.display = 'none';
     gameMenu = document.getElementById("gameMenu");
     gameMenu.style.display = 'none';
@@ -47,6 +50,14 @@ function startGame() {
     eventController = new EventController();
 
     Rubics.update();
+    }else {
+        let divs = Menu.checkMenu();
+        let divObjects = document.getElementsByClassName("blinkingDiv");
+
+        if(!blinkInterval){
+        blinkInterval = setInterval(function(){ Menu.blink(divs, divObjects)}, 300);
+        }
+    }
 }
 
 
@@ -184,13 +195,14 @@ function gameFinished(){
     return true;
 }
 
+//control stuff
 //called on button click
 function setGameSize(toggleButton){
     let buttons = document.getElementsByClassName("toggleButton"); 
     let val = toggleButton.attributes["value"].value;
 
     //TODO:fix this, it's not solid
-    for(let i = 0; i < 3; i++){
+    for(let i = 0; i < 4; i++){
         if(buttons[i] !== toggleButton){
             buttons[i].src = "../res/grid" + buttons[i].attributes["value"].value + ".png"
         }else if(toggleButton.src == "file:///home/ken/Documents/javascript/Rubics/res/check.png"){
@@ -201,6 +213,7 @@ function setGameSize(toggleButton){
             gameSize = val;
         }
     }
+    Menu.checkMenu();
 }
 
 //called on button click
@@ -232,6 +245,7 @@ function setSelectorSpeed(toggleButton, selectedIndex){
         Menu.clear(selectedIndex);
         Menu.update(selectedIndex);
     }
+        Menu.checkMenu();
 }
 
 function setDifficulty(toggleButton){
@@ -250,6 +264,7 @@ function setDifficulty(toggleButton){
             toggleButton.src = "../res/check.png";
         }
     }
+        Menu.checkMenu();
 }
 
 //called on mouse hover
@@ -291,4 +306,19 @@ function initMenu() {
             context.arc(selector.xPos, selector.xPos, selector.radius-3, 0, 2 * Math.PI, false);
             context.fill();
     }
+}
+
+//button functions
+//show/hide help
+function showHelp(){
+    document.getElementById("gameMan").style.display = 
+            document.getElementById("gameMan").style.display == "inline-block" ? "none" : "inline-block";
+}
+
+function changeButtonColor(button){
+    button.style.background = Menu.checkMenu() == true ? "green" : "red";
+}
+
+function resetButtonColor(button) {
+    button.style.background = null;
 }

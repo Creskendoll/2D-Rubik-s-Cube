@@ -5,6 +5,8 @@ button {
 	height: 50px;
 	width: 150px;
 	cursor: pointer;
+	font-size: 20px;
+	color: black;
 }
 
 div.animatedContainer {
@@ -140,12 +142,4 @@ div.insideText {
 	height: 128px;
 	width: 128px;
 	position: absolute;
-}
-
-#resumeButton {
-	border: 2px solid black;
-}
-
-#startButton {
-	border: 2px solid #4CAF50; /* Green */
 }

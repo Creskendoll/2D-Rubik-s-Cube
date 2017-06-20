@@ -47,6 +47,23 @@ var Menu = {
         contextArr[selectedIndex].arc(sels[selectedIndex].xPos, sels[selectedIndex].yPos, sels[selectedIndex].radius-3, 0, 2 * Math.PI, false);
         contextArr[selectedIndex].fill();
     },
+    checkMenu : function(){
+        let arr = new Array(3);
+        arr[0] = gameSize;
+        arr[1] = selectorSpeed;
+        arr[2] = difficulty;
+
+        let containsNull = false;
+
+        for(let i = 0; i < arr.length; i++){
+            if(arr[i] == null){
+                containsNull = true;
+                break;
+            }
+        }
+
+        return containsNull ? arr : true;
+    },
     clear : function(selectedIndex) {
          let contextArr = this.animatedContextArr;
          contextArr[selectedIndex].clearRect(0, 0, 192, 128);
@@ -59,5 +76,23 @@ var Menu = {
         sels[selectedIndex].xPos = 64;
         Menu.clear(selectedIndex);
         Menu.update(selectedIndex);
+    },
+    blink : function(divValues, divObjects){
+        for(let i = 0; i < divValues.length; i++){
+            if(divValues[i] == null){
+                if(blinkCount%2 == 0){
+                    divObjects[i].style.background = "red";
+                }else{
+                    divObjects[i].style.background = "white";
+                }
+            }
+        }
+
+            blinkCount++;
+            if(blinkCount == 4){
+                clearInterval(blinkInterval);
+                blinkInterval = false;
+                blinkCount = 0;
+            }
     }
 }
