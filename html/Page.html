@@ -86,32 +86,9 @@
 		</tr>
 
 		<tr>
-			<script type="text/javascript">
-				//TODO:refurnish this, it's a shit structure
-                function resumeGame() {
-                    document.getElementById("gameMan").style.display = 'none';
-                    let el = document.getElementById("gameSize");
-
-                    if(gameSize == Number(el.options[el.selectedIndex].value)){
-                        //hide menu
-                        gameMenu = document.getElementById("gameMenu");
-                        gameMenu.style.display = 'none';
-                        movement = false;
-
-                        el = document.getElementById("selSpeed");
-                        selectorSpeed = Number(el.options[el.selectedIndex].value);
-
-                        //show game canvas'
-                        Rubics.gameCanvas.style.display = 'inline';
-                        Rubics.infoCanvas.style.display = 'inline';
-					}else{
-                        startGame();
-					}
-                }
-			</script>
 			<td><button id="help" onclick="showHelp()">Help</button></td>
 			<td>
-				<button id="resumeButton" onclick="resumeGame()">
+				<button id="resumeButton" onclick="resume()">
 					<span>Resume</span>
 				</button>
 				<button id="startButton" onmouseout="resetButtonColor(this)" onmouseover="changeButtonColor(this)" onclick="startGame()">

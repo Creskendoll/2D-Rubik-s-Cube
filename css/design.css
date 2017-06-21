@@ -1,12 +1,62 @@
 /*merge all of this into similar elements some time*/
 
-button {
-	border-radius: 8px;
-	height: 50px;
-	width: 150px;
-	cursor: pointer;
-	font-size: 20px;
-	color: black;
+body {
+	background-image: url("../res/bakground.jpg");
+	background-repeat: no-repeat;
+}
+
+
+
+#startButton {
+  background: #2196f3;
+  background-image: -webkit-linear-gradient(top, #2196f3, #0d47a1);
+  background-image: -moz-linear-gradient(top, #2196f3, #0d47a1);
+  background-image: -ms-linear-gradient(top, #2196f3, #0d47a1);
+  background-image: -o-linear-gradient(top, #2196f3, #0d47a1);
+  background-image: linear-gradient(to bottom, #2196f3, #0d47a1);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  text-shadow: 2px 1px 5px #050105;
+  font-family: Georgia;
+  color: #f0ffe8;
+  font-size: 31px;
+  padding: 10px 20px 10px 20px;
+  border: solid #2962ff 3px;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#help {
+  background: #f44336;
+  background-image: -webkit-linear-gradient(top, #f44336, #d32f2f);
+  background-image: -moz-linear-gradient(top, #f44336, #d32f2f);
+  background-image: -ms-linear-gradient(top, #f44336, #d32f2f);
+  background-image: -o-linear-gradient(top, #f44336, #d32f2f);
+  background-image: linear-gradient(to bottom, #f44336, #d32f2f);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  text-shadow: 2px 1px 5px #050105;
+  font-family: Georgia;
+  color: #f0ffe8;
+  font-size: 31px;
+  padding: 10px 20px 10px 20px;
+  border: solid #c8e6c9 3px;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#help:hover {
+  background: #7986cb;
+  background-image: -webkit-linear-gradient(top, #7986cb, #3949ab);
+  background-image: -moz-linear-gradient(top, #7986cb, #3949ab);
+  background-image: -ms-linear-gradient(top, #7986cb, #3949ab);
+  background-image: -o-linear-gradient(top, #7986cb, #3949ab);
+  background-image: linear-gradient(to bottom, #7986cb, #3949ab);
+  text-decoration: none;
 }
 
 div.animatedContainer {

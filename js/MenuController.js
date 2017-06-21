@@ -1,6 +1,7 @@
 var menuSelectorMovement;
 
 var Menu = {
+    helpShowing : false,
     selectors : new Array(4),
     animatedContextArr : new Array(4),
     initMovement : function(selectedIndex) {
@@ -94,5 +95,25 @@ var Menu = {
                 blinkInterval = false;
                 blinkCount = 0;
             }
+    },
+    hideMenu : function(){
+        document.getElementById("gameMan").style.display = 'none';
+        gameMenu = document.getElementById("gameMenu");
+        gameMenu.style.display = 'none';
+        movement = false;
+
+        //need to make the resume button visible
+        document.getElementById("resumeButton").style.display = 'inline';
+
+        //show game canvas'
+        Rubics.gameCanvas.style.display = 'inline';
+        Rubics.infoCanvas.style.display = 'inline';
+    },
+    showMenu : function(){
+        document.getElementById("gameMan").style.display = this.helpShowing ? 'inline-block' : 'none';
+        Rubics.gameCanvas.style.display = 'none';
+        Rubics.infoCanvas.style.display = 'none';
+        gameMenu.style.display = 'inline-block';
+        document.getElementById("startButton").value = "Restart";
     }
 }

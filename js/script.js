@@ -53,9 +53,11 @@ function startGame() {
     }else {
         let divs = Menu.checkMenu();
         let divObjects = document.getElementsByClassName("blinkingDiv");
+        let errSound = new Audio("../res/err.wav");
 
         if(!blinkInterval){
-        blinkInterval = setInterval(function(){ Menu.blink(divs, divObjects)}, 300);
+            errSound.play();
+            blinkInterval = setInterval(function(){ Menu.blink(divs, divObjects)}, 300);
         }
     }
 }
@@ -313,12 +315,56 @@ function initMenu() {
 function showHelp(){
     document.getElementById("gameMan").style.display = 
             document.getElementById("gameMan").style.display == "inline-block" ? "none" : "inline-block";
+    Menu.helpShowing = !Menu.helpShowing;
 }
 
 function changeButtonColor(button){
+    button.style.border = "solid #d50000 3px";
     button.style.background = Menu.checkMenu() == true ? "green" : "red";
 }
 
 function resetButtonColor(button) {
+    button.style.border = "solid #2962ff 3px";
     button.style.background = null;
 }
+
+function resume(){
+    Menu.hideMenu();
+}
+
+
+/*var Woman = {
+    getAngry : function(person){
+        if(person === boyfriend){
+            angerLevel += 100;
+        }
+        for(let i = 0; i < angerLevel; i++){
+            alert("I hate you");
+            alert("This can't go on.");
+        }
+    },
+    love : function(person){
+        loveLevel += 50;
+        if(person === child){
+            loveLevel += 100;
+        }
+        let img = document.getElementById("img");
+        img.size = loveLevel;
+        img.src = "../res/heart.png"
+    },
+    getHungry : function(mood){
+        eatFood(10);
+        if(mood == "sad" || mood == "onWeek"){
+          eatFood(800);  
+          console.log("Gimme some of yours.");
+        }
+    },
+    care : function(){
+        while(Man.isActingStupid()){
+            alert("Be carefull");
+            if(Man.isInjured()){
+                console.log("Told ya");
+            }
+        }
+    }
+}*/
