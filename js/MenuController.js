@@ -84,7 +84,7 @@ var Menu = {
                 if(blinkCount%2 == 0){
                     divObjects[i].style.background = "red";
                 }else{
-                    divObjects[i].style.background = "white";
+                    divObjects[i].style.background = null;
                 }
             }
         }
@@ -110,10 +110,56 @@ var Menu = {
         Rubics.infoCanvas.style.display = 'inline';
     },
     showMenu : function(){
+        let bordersToBeChanged = document.getElementsByClassName("overlay");
+
+        document.getElementById("startButton").innerHTML = "Restart";
+
+        //TODO: update this when you find betten pngs
+        bordersToBeChanged[0].style.border = "2px solid";
+        for(let i = 1; i < bordersToBeChanged.length; i++){
+            bordersToBeChanged[i].style.border = "1px solid";
+        }
         document.getElementById("gameMan").style.display = this.helpShowing ? 'inline-block' : 'none';
         Rubics.gameCanvas.style.display = 'none';
         Rubics.infoCanvas.style.display = 'none';
         gameMenu.style.display = 'inline-block';
         document.getElementById("startButton").value = "Restart";
+    },
+    //handles the displaying of resume button
+    checkDiff : function(gameSize, difficulty){
+        var currentSettings = new Array(2);
+        currentSettings[0] = gameSize;
+        currentSettings[1] = difficulty;
+        let changed = false;
+
+        for(let i = 0; i < currentSettings.length; i++){
+            if(currentSettings[i] != gameSettings[i]){
+                changed = true;
+            }
+        }
+
+        if(gameSettings == null){
+            document.getElementById("startButton").innerHTML = "Start";
+            document.getElementById("resumeButton").style.display = "none";
+        }else if(!changed && gameSettings != null){
+            document.getElementById("resumeButton").style.display = "inline-block";
+            document.getElementById("startButton").innerHTML = "Restart";
+        }else if(changed && gameSettings != null){
+            document.getElementById("startButton").innerHTML = "Start";
+            document.getElementById("resumeButton").style.display = "none";
+        }
+        Menu.showPrevSettings();
+    },
+    //handles the blue borders
+    showPrevSettings : function(gameSize, difficulty){
+        let bordersToBeChanged = document.getElementsByClassName("overlay");
+        let vals = document.getElementsByClassName("toggleButton");
+
+            for(let i = 0; i < bordersToBeChanged.length; i++){
+                if(vals[i].attributes["value"].value == gameSettings[0] || vals[i].attributes["value"].value == gameSettings[1]){
+                    bordersToBeChanged[i].style.border = "4px solid blue";
+                }
+            }
+        
     }
 }

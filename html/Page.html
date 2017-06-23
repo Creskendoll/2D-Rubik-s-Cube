@@ -88,11 +88,11 @@
 		<tr>
 			<td><button id="help" onclick="showHelp()">Help</button></td>
 			<td>
-				<button id="resumeButton" onclick="resume()">
-					<span>Resume</span>
+				<button id="resumeButton" onmouseout="resetButtonColor(this)" onmouseover="changeButtonColor(this)" onclick="resume()">
+					Resume
 				</button>
 				<button id="startButton" onmouseout="resetButtonColor(this)" onmouseover="changeButtonColor(this)" onclick="startGame()">
-					<span>Start</span>
+					Start
 				</button>
 			</td>
 		</tr>
@@ -107,5 +107,6 @@
     <script type="text/javascript" src="../js/script.js"></script>
 	<script type="text/javascript" src="../js/EventController.js"></script>
 	<script type="text/javascript" src="../js/Selector.js"></script>
+	<script type="text/javascript" src="../js/UiControls.js"></script>
 </body>
 </html>

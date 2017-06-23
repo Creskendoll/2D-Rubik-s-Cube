@@ -72,10 +72,14 @@ function EventController() {
         }else{
             switch (event.key){
                 case "w":
+                    gridMovement = setInterval(function(){
+                        Rubics.moveSurface("Up");
+                    },1);
                     gridMovements[0]();
                     break;
                 case "s":
-                    gridMovements[1]();
+                    clearInterval(gridMovement);
+                    //gridMovements[1]();
                     break;
                 case "a":
                     gridMovements[2]();
@@ -91,6 +95,7 @@ function EventController() {
                     break;
                 case "Escape":
                     Menu.showMenu();
+                    Menu.showPrevSettings();
                     break;
             }
             Rubics.clear();
@@ -100,22 +105,22 @@ function EventController() {
 }
 
 function randomizeSurface() {
+    //to reset the selector position
     var selectorPos = [selector.indexX, selector.indexY];
     switch (difficulty){
         case "Easy":
         do{
-            for(let i = 0; i < 3; i++){
+            for(let i = 0; i < 4; i++){
                 selector.indexX = Math.floor(Math.random() * gameSize);
                 selector.indexY = Math.floor(Math.random() * gameSize);
                 gridMovements[Math.floor(Math.random() * 4)]();
-                console.log("X: " + selector.indexX + "Y: " + selector.indexY);
             }
             selector.indexX = selectorPos[0]; selector.indexY = selectorPos[1];
         }while(gameFinished());
         break;
         case "Medium":
         do{
-            for(let i = 0; i < 5; i++){
+            for(let i = 0; i < 6; i++){
                 selector.indexX = Math.floor(Math.random() * gameSize);
                 selector.indexY = Math.floor(Math.random() * gameSize);
                 gridMovements[Math.floor(Math.random() * 4)]();
@@ -147,13 +152,13 @@ function randomizeSurface() {
 }
 
 //this is for gathering data from the game board and saving it on the local machine
-function gatherData(surface) {
+/*function gatherData(surface) {
     for(var i = 0; i < gameSize; i++){
         for(var j = 0; j < gameSize; j++){
 
         }
     }
-}
+}*/
 
 //surface grid movement functions, 0-up 1-down, 2-left, 3-right
 var gridMovements = [
@@ -166,9 +171,11 @@ var gridMovements = [
         }
 
         for(let i = 0; i < gameSize; i++){
-            tempGrid = tempArr[(i+1)%(gameSize)];
-            surface[selector.indexX][i] = new Grid(tempGrid.color,
-            tempArr[i].xPos, tempArr[i].yPos);
+            tempGrid = tempArr[i];
+            //tempGrid = tempArr[(i+1)%(gameSize)];
+            /*surface[selector.indexX][i] = new Grid(tempGrid.color,
+            tempArr[i].xPos, tempArr[i].yPos);*/
+            surface[selector.indexX][i] = tempGrid;
         }
     },
     function moveGridDown(){

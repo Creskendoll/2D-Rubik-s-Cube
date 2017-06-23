@@ -5,8 +5,12 @@ var difficulty = null;
 
 var selector;
 var selectorSpeed = null;
+var gridMovementSpeed = 2;
 
 var movement;
+var gridMovement;
+var gridMovementDistance = 0;
+
 var blinkInterval = false;
 var blinkCount = 0;
 var eventController;
@@ -15,41 +19,47 @@ var gameMenu;
 
 var gameSize = null;
 
+var gameSettings = null;
+
 var canvasSize = 600;
 var gameContext;
 function startGame() {
     if(Menu.checkMenu() == true){
-    document.getElementById("gameMan").style.display = 'none';
-    gameMenu = document.getElementById("gameMenu");
-    gameMenu.style.display = 'none';
-    movement = false;
+        document.getElementById("gameMan").style.display = 'none';
+        gameMenu = document.getElementById("gameMenu");
+        gameMenu.style.display = 'none';
+        movement = false;
+        gridMovement = false;
 
-    //need to make the resume button visible
-    document.getElementById("resumeButton").style.display = 'inline';
+        //need to make the resume button visible
+        document.getElementById("resumeButton").style.display = 'inline';
 
-    //show game canvas'
-    Rubics.gameCanvas.style.display = 'inline';
-    Rubics.infoCanvas.style.display = 'inline';
+        //show game canvas'
+        Rubics.gameCanvas.style.display = 'inline';
+        Rubics.infoCanvas.style.display = 'inline';
 
-    //initialize game elements
-    selector = new Selector(canvasSize, gameSize);
-    infoSurface = new InfoCanvas();
+        //initialize game elements
+        selector = new Selector(canvasSize, gameSize);
+        infoSurface = new InfoCanvas();
 
-    //initialize the game
-    Rubics.start();
+        //initialize the game
+        Rubics.start();
 
-    gameContext = Rubics.context;
-    //initialize an empty array for our surface
-    surface = new Array(gameSize);
-    for(var i = 0; i < gameSize; i++){
-        surface[i] = new Array(gameSize);
-    }
-    //fills the surface with grids
-    surface = fillSurface(surface);
+        gameContext = Rubics.context;
+        //initialize an empty array for our surface
+        surface = new Array(gameSize);
+        for(var i = 0; i < gameSize; i++){
+            surface[i] = new Array(gameSize);
+        }
+        //fills the surface with grids
+        surface = fillSurface(surface);
 
-    eventController = new EventController();
+        eventController = new EventController();
 
-    Rubics.update();
+        //save game vars
+        gameSettings = [gameSize, difficulty];
+
+        Rubics.update();
     }else {
         let divs = Menu.checkMenu();
         let divObjects = document.getElementsByClassName("blinkingDiv");
@@ -61,7 +71,6 @@ function startGame() {
         }
     }
 }
-
 
 var Rubics = {
     gameCanvas : document.createElement("canvas"),
@@ -99,8 +108,16 @@ var Rubics = {
         //draw surface
         for (i = 0; i < gameSize; i++) {
             for (j = 0; j < gameSize; j++) {
-                gameContext.fillStyle = surface[i][j].color;
-                gameContext.fillRect(surface[i][j].xPos, surface[i][j].yPos, surface[i][j].size, surface[i][j].size);
+                //up
+                if(surface[i][j].yPos < 0){
+                    let height = Math.abs(surface[i][j].yPos);
+                    gameContext.fillStyle = surface[i][j].color;
+                    gameContext.fillRect(surface[i][j].xPos, canvasSize-height, surface[i][j].size, height);
+                    gameContext.fillRect(surface[i][j].xPos, 0, surface[i][j].size, surface[i][j].size-height);
+                }else {
+                    gameContext.fillStyle = surface[i][j].color;
+                    gameContext.fillRect(surface[i][j].xPos, surface[i][j].yPos, surface[i][j].size, surface[i][j].size);
+                }
             }
         }
 
@@ -140,6 +157,31 @@ var Rubics = {
         gameContext.beginPath();
         gameContext.arc(selector.xPos, selector.yPos, selector.radius, 0, 2 * Math.PI, false);
         gameContext.fill();
+    },
+    moveSurface : function(direction){
+        let tempArr = new Array(gameSize);
+        switch (direction){
+            case "Up":
+            for(let i = 0; i < gameSize; i++){
+                surface[selector.indexX][i].yPos -= gridMovementSpeed;
+                gridMovementDistance += gridMovementSpeed;
+                if(gridMovementDistance >= surface[0][0].size*gameSize){
+                    clearInterval(gridMovement);
+                    gridMovement = false;
+                    gridMovementDistance = 0;
+                    surface[selector.indexX][0].yPos = canvasSize - surface[0][0].size;
+                }
+            }
+            Rubics.clear();
+            Rubics.update();
+            break;
+            case "Down":
+            break;
+            case "Left":
+            break;
+            case "Right":
+            break;
+        }
     }
 };
 
@@ -215,7 +257,8 @@ function setGameSize(toggleButton){
             gameSize = val;
         }
     }
-    Menu.checkMenu();
+   // Menu.checkMenu();
+    Menu.checkDiff(gameSize, difficulty);
 }
 
 //called on button click
@@ -247,7 +290,8 @@ function setSelectorSpeed(toggleButton, selectedIndex){
         Menu.clear(selectedIndex);
         Menu.update(selectedIndex);
     }
-        Menu.checkMenu();
+      //  Menu.checkMenu();
+        Menu.checkDiff(gameSize, difficulty);
 }
 
 function setDifficulty(toggleButton){
@@ -266,70 +310,8 @@ function setDifficulty(toggleButton){
             toggleButton.src = "../res/check.png";
         }
     }
-        Menu.checkMenu();
-}
-
-//called on mouse hover
-function animateMenuSelectorGrid(toggleButton, selectedIndex){
-    if(toggleButton.attributes["selected"].value == "false"){
-    Menu.initMovement(Number(selectedIndex));
-    }
-}
-
-//called on mouse exit
-function resetAnimatedCanvas(toggleButton, selectedIndex) {
-    if(toggleButton.attributes["selected"].value == "false"){
-    Menu.reset(selectedIndex);
-    }
-}
-
-//called on body load
-function initMenu() {
-    var selectorCanvasArr = document.getElementsByClassName("animatedCanvas");
-    for(let i = 0; i < selectorCanvasArr.length; i++){
-            selectorCanvasArr[i].height = 128;
-            selectorCanvasArr[i].width = 256;
-            selectorCanvasArr[i].position = 'absolute';
-            let selector = new Selector(128, 1);
-            let context = selectorCanvasArr[i].getContext("2d");
-
-            context.fillStyle = "red";
-            context.fillRect(0,0,128,128);
-            context.fillStyle = "blue";
-            context.fillRect(128,0,128,128);
-
-            //save the variables into the Menu object
-            Menu.selectors[i] = selector;
-            Menu.animatedContextArr[i] = context;
-
-            //draw selectors
-            context.fillStyle = selector.color;
-            context.beginPath();
-            context.arc(selector.xPos, selector.xPos, selector.radius-3, 0, 2 * Math.PI, false);
-            context.fill();
-    }
-}
-
-//button functions
-//show/hide help
-function showHelp(){
-    document.getElementById("gameMan").style.display = 
-            document.getElementById("gameMan").style.display == "inline-block" ? "none" : "inline-block";
-    Menu.helpShowing = !Menu.helpShowing;
-}
-
-function changeButtonColor(button){
-    button.style.border = "solid #d50000 3px";
-    button.style.background = Menu.checkMenu() == true ? "green" : "red";
-}
-
-function resetButtonColor(button) {
-    button.style.border = "solid #2962ff 3px";
-    button.style.background = null;
-}
-
-function resume(){
-    Menu.hideMenu();
+       // Menu.checkMenu();
+        Menu.checkDiff(gameSize, difficulty);
 }
 
 
