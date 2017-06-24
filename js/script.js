@@ -108,13 +108,22 @@ var Rubics = {
         //draw surface
         for (i = 0; i < gameSize; i++) {
             for (j = 0; j < gameSize; j++) {
-                //up
                 if(surface[i][j].yPos < 0){
+                    //up
                     let height = Math.abs(surface[i][j].yPos);
                     gameContext.fillStyle = surface[i][j].color;
-                    gameContext.fillRect(surface[i][j].xPos, canvasSize-height, surface[i][j].size, height);
                     gameContext.fillRect(surface[i][j].xPos, 0, surface[i][j].size, surface[i][j].size-height);
-                }else {
+                    gameContext.fillRect(surface[i][j].xPos, canvasSize-height, surface[i][j].size, height);
+                }else if(surface[i][j].yPos > canvasSize-surface[i][j].size){
+                    //down
+                    console.log(surface[i][j].yPos);
+                    let insideHeight = canvasSize - surface[i][j].yPos;
+                    let height = surface[i][j].size - insideHeight;
+                    
+                    gameContext.fillStyle = surface[i][j].color;
+                    gameContext.fillRect(surface[i][j].xPos, 0, surface[i][j].size, height);
+                    gameContext.fillRect(surface[i][j].xPos, canvasSize-insideHeight, surface[i][j].size, canvasSize);
+                }else{
                     gameContext.fillStyle = surface[i][j].color;
                     gameContext.fillRect(surface[i][j].xPos, surface[i][j].yPos, surface[i][j].size, surface[i][j].size);
                 }
@@ -165,6 +174,7 @@ var Rubics = {
             for(let i = 0; i < gameSize; i++){
                 surface[selector.indexX][i].yPos -= gridMovementSpeed;
                 gridMovementDistance += gridMovementSpeed;
+                //if it traveled enough
                 if(gridMovementDistance >= surface[0][0].size*gameSize){
                     clearInterval(gridMovement);
                     gridMovement = false;
@@ -176,6 +186,18 @@ var Rubics = {
             Rubics.update();
             break;
             case "Down":
+            for(let i = 0; i < gameSize; i++){
+                surface[selector.indexX][i].yPos += gridMovementSpeed;
+                gridMovementDistance += gridMovementSpeed;
+                if(gridMovementDistance >= surface[0][0].size*gameSize){
+                    clearInterval(gridMovement);
+                    gridMovement = false;
+                    gridMovementDistance = 0;
+                    gridMovements[1]();
+                }
+            }           
+            Rubics.clear();
+            Rubics.update();
             break;
             case "Left":
             break;
