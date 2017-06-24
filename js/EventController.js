@@ -15,8 +15,8 @@ function EventController() {
                             selector.outOfMap = true;
                         }
                         if(selectorSpeed != 0){
-                        movement = setInterval(function(){
-                            selector.move(event.keyCode, selector.xPosArr[selector.indexX])}, 1);
+                            movement = setInterval(function(){
+                                selector.move(event.keyCode, selector.xPosArr[selector.indexX])}, 1);
                         }else{
                             selector.xPos = selector.xPosArr[selector.indexX];
                             Rubics.update();
@@ -86,10 +86,18 @@ function EventController() {
                 }
                     break;
                 case "a":
-                    gridMovements[2]();
+                if(!gridMovement){
+                    gridMovement = setInterval(function(){
+                        Rubics.moveSurface("Left");
+                    },1);
+                }
                     break;
                 case "d":
-                    gridMovements[3]();
+                if(!gridMovement){
+                    gridMovement = setInterval(function(){
+                        Rubics.moveSurface("Right");
+                    },1);
+                }
                     break;
                 case "r":
                     infoSurface.drawInfoSurface();
@@ -210,8 +218,13 @@ var gridMovements = [
 
         for(let i = 0; i < gameSize; i++){
             tempGrid = tempArr[(i+1)%(gameSize)];
-            surface[i][selector.indexY] = new Grid(tempGrid.color,
-            tempArr[i].xPos, tempArr[i].yPos);
+            if(tempGrid.xPos < 0){
+                    surface[gameSize-1][selector.indexY] = new Grid(tempGrid.color,
+                 canvasSize-tempGrid.size, tempGrid.yPos);
+            }else{
+                    surface[i][selector.indexY] = new Grid(tempGrid.color,
+                tempGrid.xPos, tempGrid.yPos);
+            }
         }
     },
     function moveGridRight(){
@@ -221,10 +234,12 @@ var gridMovements = [
             tempArr[i] = surface[i][selector.indexY];
         }
 
-        surface[0][selector.indexY] = new Grid(tempArr[gameSize-1].color, tempArr[0].xPos, tempArr[0].yPos);
-        
+        surface[0][selector.indexY] = new Grid(tempArr[gameSize-1].color,
+        0, tempArr[0].yPos);
+
         for(let i = 1; i < gameSize; i++){
-            surface[i][selector.indexY] = new Grid(tempArr[i-1].color, tempArr[i].xPos, tempArr[i].yPos);
+            surface[i][selector.indexY] = new Grid(tempArr[i-1].color, 
+            tempArr[i].xPos-surface[0][0].size, tempArr[i].yPos);
         }
     }
 ]

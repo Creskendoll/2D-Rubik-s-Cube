@@ -5,7 +5,7 @@ var difficulty = null;
 
 var selector;
 var selectorSpeed = null;
-var gridMovementSpeed = 2;
+var gridMovementSpeed = 5;
 
 var movement;
 var gridMovement;
@@ -109,20 +109,35 @@ var Rubics = {
         for (i = 0; i < gameSize; i++) {
             for (j = 0; j < gameSize; j++) {
                 if(surface[i][j].yPos < 0){
-                    //up
+                    //upmost
                     let height = Math.abs(surface[i][j].yPos);
+
                     gameContext.fillStyle = surface[i][j].color;
                     gameContext.fillRect(surface[i][j].xPos, 0, surface[i][j].size, surface[i][j].size-height);
                     gameContext.fillRect(surface[i][j].xPos, canvasSize-height, surface[i][j].size, height);
                 }else if(surface[i][j].yPos > canvasSize-surface[i][j].size){
-                    //down
-                    console.log(surface[i][j].yPos);
+                    //downmost
                     let insideHeight = canvasSize - surface[i][j].yPos;
                     let height = surface[i][j].size - insideHeight;
                     
                     gameContext.fillStyle = surface[i][j].color;
                     gameContext.fillRect(surface[i][j].xPos, 0, surface[i][j].size, height);
                     gameContext.fillRect(surface[i][j].xPos, canvasSize-insideHeight, surface[i][j].size, canvasSize);
+                }else if(surface[i][j].xPos < 0){
+                    //leftmost
+                    let height = Math.abs(surface[i][j].xPos);
+
+                    gameContext.fillStyle = surface[i][j].color;
+                    gameContext.fillRect(0, surface[i][j].yPos, surface[i][j].size-height, surface[i][j].size);
+                    gameContext.fillRect(canvasSize-height, surface[i][j].yPos, height, surface[i][j].size);
+                }else if(surface[i][j].xPos > canvasSize-surface[i][j].size){
+                    //rightmost
+                    let insideHeight = canvasSize - surface[i][j].xPos;
+                    let height = surface[i][j].size - insideHeight;
+                    
+                    gameContext.fillStyle = surface[i][j].color;
+                    gameContext.fillRect(0, surface[i][j].yPos, height, surface[i][j].size);
+                    gameContext.fillRect(canvasSize-insideHeight, surface[i][j].yPos, surface[i][j].size, canvasSize);
                 }else{
                     gameContext.fillStyle = surface[i][j].color;
                     gameContext.fillRect(surface[i][j].xPos, surface[i][j].yPos, surface[i][j].size, surface[i][j].size);
@@ -200,8 +215,33 @@ var Rubics = {
             Rubics.update();
             break;
             case "Left":
+            for(let i = 0; i < gameSize; i++){
+                surface[i][selector.indexY].xPos -= gridMovementSpeed;
+                gridMovementDistance += gridMovementSpeed;
+                //if it traveled enough
+                if(gridMovementDistance >= surface[0][0].size*gameSize){
+                    clearInterval(gridMovement);
+                    gridMovement = false;
+                    gridMovementDistance = 0;
+                    gridMovements[2]();
+                }
+            }
+            Rubics.clear();
+            Rubics.update();
             break;
             case "Right":
+            for(let i = 0; i < gameSize; i++){
+                surface[i][selector.indexY].xPos += gridMovementSpeed;
+                gridMovementDistance += gridMovementSpeed;
+                if(gridMovementDistance >= surface[0][0].size*gameSize){
+                    clearInterval(gridMovement);
+                    gridMovement = false;
+                    gridMovementDistance = 0;
+                    gridMovements[3]();
+                }
+            }
+            Rubics.clear();
+            Rubics.update();
             break;
         }
     }
@@ -302,7 +342,7 @@ function setSelectorSpeed(toggleButton, selectedIndex){
         let img = new Image();
         img.src = "../res/check.png";
         img.onload = function() {
-        toggleButton.getContext("2d").drawImage(img, 64,0,128,128);
+            toggleButton.getContext("2d").drawImage(img, 64,0,128,128);
         };
         selectorSpeed = Number(toggleButton.attributes["value"].value);
         toggleButton.attributes["selected"].value = "true";
