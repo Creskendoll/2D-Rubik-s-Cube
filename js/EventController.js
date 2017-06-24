@@ -72,10 +72,12 @@ function EventController() {
         }else{
             switch (event.key){
                 case "w":
+                if(!gridMovement){
                     gridMovement = setInterval(function(){
                         Rubics.moveSurface("Up");
                     },1);
-                    gridMovements[0]();
+                    //gridMovements[0]();
+                }
                     break;
                 case "s":
                     clearInterval(gridMovement);
@@ -171,11 +173,14 @@ var gridMovements = [
         }
 
         for(let i = 0; i < gameSize; i++){
-            tempGrid = tempArr[i];
-            //tempGrid = tempArr[(i+1)%(gameSize)];
-            /*surface[selector.indexX][i] = new Grid(tempGrid.color,
-            tempArr[i].xPos, tempArr[i].yPos);*/
-            surface[selector.indexX][i] = tempGrid;
+            tempGrid = tempArr[(i+1)%(gameSize)];
+            if(tempGrid.yPos < 0){
+                    surface[selector.indexX][gameSize-1] = new Grid(tempGrid.color,
+                tempGrid.xPos, canvasSize-tempGrid.size);
+            }else{
+                    surface[selector.indexX][i] = new Grid(tempGrid.color,
+                tempGrid.xPos, tempGrid.yPos);
+            }
         }
     },
     function moveGridDown(){

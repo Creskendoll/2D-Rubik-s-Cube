@@ -169,7 +169,7 @@ var Rubics = {
                     clearInterval(gridMovement);
                     gridMovement = false;
                     gridMovementDistance = 0;
-                    surface[selector.indexX][0].yPos = canvasSize - surface[0][0].size;
+                    gridMovements[0]();
                 }
             }
             Rubics.clear();
