@@ -123,7 +123,7 @@ div.first {
 	margin-left: 10px;
 }
 
-.overlay:hover div.difficultyText {
+.diffOverlay:hover div.difficultyText {
 	opacity: 1;
 }
 
@@ -174,17 +174,33 @@ div.overlay {
 	cursor: pointer;
 }
 
+div.diffOverlay {
+	height: 128px;
+	width: 128px;
+	cursor: pointer;
+	text-align: center;
+	cursor: pointer;
+}
+
 div.border {
 	border: 2px solid;
 	margin-left: 10px;
 }
 
-.overlay:hover img.toggleButton{
+.diffOverlay:hover img.toggleButton{
 	opacity: 0.5;
+}
+
+.diffOverlay:hover div.insideText{
+	opacity: 1;
 }
 
 .overlay:hover div.insideText{
 	opacity: 1;
+}
+
+.overlay:hover img.toggleButton{
+	opacity: 0.2;
 }
 
 div.insideText {
