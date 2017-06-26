@@ -1,25 +1,32 @@
+//game surfaces
 var surface;
-var infoSurface;
 var goalSurface;
+
+//main menu
+var infoSurface;
+
+//starts null to prevent smt but i don't remember :)
 var difficulty = null;
+var gameSize = null;
+var selectorSpeed = null;
+var gameSettings = null;
 
 var selector;
-var selectorSpeed = null;
-var gridMovementSpeed = 5;
 
+//intervals and interval related variables
 var movement;
+
 var gridMovement;
 var gridMovementDistance = 0;
+var gridMovementSpeed = 5;
 
 var blinkInterval = false;
 var blinkCount = 0;
+
+//listener
 var eventController;
 
 var gameMenu;
-
-var gameSize = null;
-
-var gameSettings = null;
 
 var canvasSize = 600;
 var gameContext;
@@ -194,7 +201,7 @@ var Rubics = {
                     clearInterval(gridMovement);
                     gridMovement = false;
                     gridMovementDistance = 0;
-                    gridMovements[0]();
+                    gridMovements[0](true);
                 }
             }
             Rubics.clear();
@@ -208,7 +215,7 @@ var Rubics = {
                     clearInterval(gridMovement);
                     gridMovement = false;
                     gridMovementDistance = 0;
-                    gridMovements[1]();
+                    gridMovements[1](true);
                 }
             }           
             Rubics.clear();
@@ -223,7 +230,7 @@ var Rubics = {
                     clearInterval(gridMovement);
                     gridMovement = false;
                     gridMovementDistance = 0;
-                    gridMovements[2]();
+                    gridMovements[2](true);
                 }
             }
             Rubics.clear();
@@ -237,7 +244,7 @@ var Rubics = {
                     clearInterval(gridMovement);
                     gridMovement = false;
                     gridMovementDistance = 0;
-                    gridMovements[3]();
+                    gridMovements[3](true);
                 }
             }
             Rubics.clear();
