@@ -10,7 +10,7 @@
 	</script>
 
 	<script src="../bower_components/file-saver/FileSaver.js"></script>
-	<link rel="stylesheet" type="text/css" href="../css/design.css">
+	<link rel="stylesheet" type="text/css" href="../css/MenuDesign.css">
 </head>
 <body onload="hideBut(); initMenu();">
 	<table id="gameMenu">
@@ -18,21 +18,29 @@
 			<td class="blinkingDiv" id="sizeDiv" align="center">Game Size</td>
 			<td>
 			<div class="sizeButtons">
-				<div class="overlay border">
-					<div class="insideText" id="three">3 X 3</div>
+				<div class="sizeOverlay border">
 					<img src="../res/grid3.png" class="toggleButton" value="3" onclick="setGameSize(this)"></img>
+					<div class="middleCanvas">
+						<div class="insideText" id="three">3 X 3</div>
+					</div>
 				</div>
-				<div class="overlay">
-					<div class="insideText" id="four">4 X 4</div>
+				<div class="sizeOverlay">
 					<img src="../res/grid4.png" class="toggleButton" value="4" onclick="setGameSize(this)"></img>
+					<div class="middleCanvas">
+						<div class="insideText" id="four">4 X 4</div>
+					</div>
 				</div>
-				<div class="overlay">
-					<div class="insideText" id="five">5 X 5</div>
+				<div class="sizeOverlay">
 					<img src="../res/grid5.png" class="toggleButton" value="5" onclick="setGameSize(this)"></img>
+					<div class="middleCanvas">
+						<div class="insideText" id="five">5 X 5</div>
+					</div>
 				</div>
-				<div class="overlay">
-					<div class="insideText" id="six">6 X 6</div>
+				<div class="sizeOverlay">
 					<img src="../res/grid6.png" class="toggleButton" value="6" onclick="setGameSize(this)"></img>
+					<div class="middleCanvas">
+						<div class="insideText" id="six">6 X 6</div>
+					</div>
 				</div>
 			</div>
 			</td>
@@ -65,24 +73,31 @@
 		<tr>
 			<td class="blinkingDiv" id="diffDiv" align="center">Difficulty</td>
 			<td>
+				<!-- changed  difficultyText to insideText, added middleCanvas-->
 			<div class="difficultyButtons">
 				<div class="diffOverlay first">
-					<div class="difficultyText">Easy</div>
 					<img src="../res/smileyEasy.png" class="toggleButton" value="Easy" onclick="setDifficulty(this)"></img>
-				</div>
-				<div class="diffOverlay">
-					<div class="difficultyText">Medium</div>
-					<img src="../res/smileyMedium.png" class="toggleButton" value="Medium" onclick="setDifficulty(this)"></img>
-				</div>
-				<div class="diffOverlay">
-					<div class="difficultyText">
-						<div>Hard</div>
+					<div class="middleCanvas">
+						<div class="insideText">Easy</div>
 					</div>
-					<img src="../res/smileyHard.png" class="toggleButton" value="Hard" onclick="setDifficulty(this)"></img>
 				</div>
 				<div class="diffOverlay">
-					<div class="difficultyText">Expert</div>
+					<img src="../res/smileyMedium.png" class="toggleButton" value="Medium" onclick="setDifficulty(this)"></img>
+					<div class="middleCanvas">
+						<div class="insideText">Medium</div>
+					</div>
+				</div>
+				<div class="diffOverlay">
+					<img src="../res/smileyHard.png" class="toggleButton" value="Hard" onclick="setDifficulty(this)"></img>
+					<div class="middleCanvas">
+						<div class="insideText">Hard</div>
+					</div>
+				</div>
+				<div class="diffOverlay">
 					<img src="../res/smileyExpert.png" class="toggleButton" value="Expert" onclick="setDifficulty(this)"></img>
+					<div class="middleCanvas">
+						<div class="insideText">Expert</div>
+					</div>
 				</div>				
 			</td>
 		</tr>
