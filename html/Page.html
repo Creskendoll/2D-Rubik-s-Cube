@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <meta charset="UTF-8">
 <head>
 	<title>Rubics</title>
@@ -9,7 +9,6 @@
     }
 	</script>
 
-	<script src="../bower_components/file-saver/FileSaver.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/MenuDesign.css">
 </head>
 <body onload="hideBut(); initMenu();">
@@ -19,27 +18,27 @@
 			<td>
 			<div class="sizeButtons">
 				<div class="sizeOverlay border">
-					<img src="../res/grid3.png" class="toggleButton" value="3" onclick="setGameSize(this)"></img>
-					<div class="middleCanvas">
-						<div class="insideText" id="three">3 X 3</div>
+					<img src="../res/grid3.png" class="toggleButton" value="3" onclick="setGameSize(this)"/>
+					<div class="middleCanvas" onclick="setGameSize(document.getElementsByClassName('toggleButton')[0])">
+						<div class="sizeText" id="three">3 X 3</div>
 					</div>
 				</div>
 				<div class="sizeOverlay">
-					<img src="../res/grid4.png" class="toggleButton" value="4" onclick="setGameSize(this)"></img>
-					<div class="middleCanvas">
-						<div class="insideText" id="four">4 X 4</div>
+					<img src="../res/grid4.png" class="toggleButton" value="4" onclick="setGameSize(this)"/>
+					<div class="middleCanvas" onclick="setGameSize(document.getElementsByClassName('toggleButton')[1])">
+						<div class="sizeText" id="four">4 X 4</div>
 					</div>
 				</div>
 				<div class="sizeOverlay">
-					<img src="../res/grid5.png" class="toggleButton" value="5" onclick="setGameSize(this)"></img>
-					<div class="middleCanvas">
-						<div class="insideText" id="five">5 X 5</div>
+					<img src="../res/grid5.png" class="toggleButton" value="5" onclick="setGameSize(this)"/>
+					<div class="middleCanvas" onclick="setGameSize(document.getElementsByClassName('toggleButton')[2])">
+						<div class="sizeText" id="five">5 X 5</div>
 					</div>
 				</div>
 				<div class="sizeOverlay">
-					<img src="../res/grid6.png" class="toggleButton" value="6" onclick="setGameSize(this)"></img>
-					<div class="middleCanvas">
-						<div class="insideText" id="six">6 X 6</div>
+					<img src="../res/grid6.png" class="toggleButton" value="6" onclick="setGameSize(this)"/>
+					<div class="middleCanvas" onclick="setGameSize(document.getElementsByClassName('toggleButton')[3])">
+						<div class="sizeText" id="six">6 X 6</div>
 					</div>
 				</div>
 			</div>
@@ -52,19 +51,19 @@
 			<div class="speedButtons">
 				<div class="animatedContainer">
 					<canvas class="animatedCanvas" selected="false" value="2" onmouseout="resetAnimatedCanvas(this, 0)" 
-						onmouseover="animateMenuSelectorGrid(this, 0);" onclick="setSelectorSpeed(this, 0)">
+						onmouseover="animateMenuSelectorGrid(this, 0);" onclick="setSelectorSpeed(this, 0)"/>
 				</div>
 				<div class="animatedContainer">
 					<canvas class="animatedCanvas" selected="false" value="4" onmouseout="resetAnimatedCanvas(this, 1)"
-						onmouseover="animateMenuSelectorGrid(this, 1);" onclick="setSelectorSpeed(this, 1)">
+						onmouseover="animateMenuSelectorGrid(this, 1);" onclick="setSelectorSpeed(this, 1)"/>
 				</div>
 				<div class="animatedContainer">
 					<canvas class="animatedCanvas" selected="false" value="8" onmouseout="resetAnimatedCanvas(this, 2)"
-						onmouseover="animateMenuSelectorGrid(this, 2);" onclick="setSelectorSpeed(this, 2)">
+						onmouseover="animateMenuSelectorGrid(this, 2);" onclick="setSelectorSpeed(this, 2)"/>
 				</div>
 				<div class="animatedContainer">
 					<canvas class="animatedCanvas" selected="false" value="0" onmouseout="resetAnimatedCanvas(this, 3)" 
-						onmouseover="animateMenuSelectorGrid(this, 3);" onclick="setSelectorSpeed(this, 3)">
+						onmouseover="animateMenuSelectorGrid(this, 3);" onclick="setSelectorSpeed(this, 3)"/>
 				</div>
 			</div>
 			</td>
@@ -76,29 +75,30 @@
 				<!-- changed  difficultyText to insideText, added middleCanvas-->
 			<div class="difficultyButtons">
 				<div class="diffOverlay first">
-					<img src="../res/smileyEasy.png" class="toggleButton" value="Easy" onclick="setDifficulty(this)"></img>
-					<div class="middleCanvas">
+					<img src="../res/smileyEasy.png" class="toggleButton" value="Easy" onclick="setDifficulty(this)"/>
+					<div class="middleCanvas" onclick="setDifficulty(document.getElementsByClassName('toggleButton')[4])">
 						<div class="insideText">Easy</div>
 					</div>
 				</div>
 				<div class="diffOverlay">
-					<img src="../res/smileyMedium.png" class="toggleButton" value="Medium" onclick="setDifficulty(this)"></img>
-					<div class="middleCanvas">
+					<img src="../res/smileyMedium.png" class="toggleButton" value="Medium" onclick="setDifficulty(this)"/>
+					<div class="middleCanvas" onclick="setDifficulty(document.getElementsByClassName('toggleButton')[5])">
 						<div class="insideText">Medium</div>
 					</div>
 				</div>
 				<div class="diffOverlay">
-					<img src="../res/smileyHard.png" class="toggleButton" value="Hard" onclick="setDifficulty(this)"></img>
-					<div class="middleCanvas">
+					<img src="../res/smileyHard.png" class="toggleButton" value="Hard" onclick="setDifficulty(this)"/>
+					<div class="middleCanvas" onclick="setDifficulty(document.getElementsByClassName('toggleButton')[6])">
 						<div class="insideText">Hard</div>
 					</div>
 				</div>
 				<div class="diffOverlay">
-					<img src="../res/smileyExpert.png" class="toggleButton" value="Expert" onclick="setDifficulty(this)"></img>
-					<div class="middleCanvas">
+					<img src="../res/smileyExpert.png" class="toggleButton" value="Expert" onclick="setDifficulty(this)"/>
+					<div class="middleCanvas" onclick="setDifficulty(document.getElementsByClassName('toggleButton')[7])">
 						<div class="insideText">Expert</div>
 					</div>
-				</div>				
+				</div>
+             </div>
 			</td>
 		</tr>
 

@@ -64,7 +64,7 @@ body {
   margin: 10px;
 }
 
-div.animatedContainer {
+.animatedContainer {
 	cursor: pointer;
 	height: 128px;
 	width: 256px;
@@ -73,10 +73,9 @@ div.animatedContainer {
 
 #gameMenu {
 	border-spacing: 2px;
-	margin-left: 40px;
-	margin-right: 40px;
+	margin-left: 10px;
 	margin-bottom: 35px;
-	margin-top: 35px;
+	margin-top: 20px;
 }
 
 table, td{
@@ -107,7 +106,7 @@ td {
 	position: relative;
 }
 
-div.sizeOverlay {
+.sizeOverlay {
 	position: relative;
 	display: block;
 	height: 128px;
@@ -117,7 +116,7 @@ div.sizeOverlay {
 	text-align: center;
 }
 
-div.diffOverlay {
+.diffOverlay {
 	position: relative;
 	display: block;
 	height: 128px;
@@ -141,7 +140,15 @@ div.diffOverlay {
 	background-color: #4CAF50;
 	font-size: 30px;
 	font-family: Arial, Helvetica, sans-serif;
-	position: fixed;
+	position: absolute;
+}
+
+.sizeText {
+    color: black;
+    background-color: #4CAF50;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: fixed;
 }
 
 .sizeButtons img {
@@ -187,7 +194,7 @@ div.diffOverlay {
 	margin-bottom: 10px;
 }
 
-div.border {
+.border {
 	border: 2px solid;
 }
 

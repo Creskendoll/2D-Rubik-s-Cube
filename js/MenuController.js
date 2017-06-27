@@ -114,8 +114,8 @@ var Menu = {
 
         document.getElementById("startButton").innerHTML = "Restart";
 
-        //TODO: update this when you find betten pngs
-        bordersToBeChanged[0].style.border = "2px solid";
+        //TODO: update this when you find better pngs
+        //bordersToBeChanged[0].style.border = "2px solid";
         for(let i = 1; i < bordersToBeChanged.length; i++){
             bordersToBeChanged[i].style.border = "1px solid";
         }
@@ -152,14 +152,25 @@ var Menu = {
     },
     //handles the blue borders
     showPrevSettings : function(gameSize, difficulty){
-        let bordersToBeChanged = document.getElementsByClassName("overlay");
+        let sizeOverlays = document.getElementsByClassName("sizeOverlay");
+        let difficultyOverlays = document.getElementsByClassName("diffOverlay");
         let vals = document.getElementsByClassName("toggleButton");
 
-            for(let i = 0; i < bordersToBeChanged.length; i++){
-                if(vals[i].attributes["value"].value == gameSettings[0] || vals[i].attributes["value"].value == gameSettings[1]){
-                    bordersToBeChanged[i].style.border = "4px solid blue";
-                }
+        for (let i = 0; i < sizeOverlays.length; i++){
+            if (vals[i].attributes["value"].value == gameSettings[0]) {
+                sizeOverlays[i].style.border = "3px solid blue";
+            } else {
+                sizeOverlays[i].style.border = "initial";
             }
+        }
+
+        for (let i = 0; i < difficultyOverlays.length; i++) {
+            if (vals[i+4].attributes["value"].value == gameSettings[1]) {
+                difficultyOverlays[i].style.border = "3px solid blue";
+            } else {
+                difficultyOverlays[i].style.border = "initial";
+            }
+        }
         
     }
 }
