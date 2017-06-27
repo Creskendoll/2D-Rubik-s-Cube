@@ -93,7 +93,7 @@ function Selector(canvasSize, gameSize) {
 
     this.moveInMenu = function(selectorSpeed, selectedIndex){
         this.xPos += selectorSpeed;
-        if(this.xPos >= 180){
+        if(this.xPos >= 192){
             clearInterval(menuSelectorMovement);
         }
         Menu.clear(selectedIndex);

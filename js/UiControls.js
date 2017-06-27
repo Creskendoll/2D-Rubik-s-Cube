@@ -16,16 +16,16 @@ function resetAnimatedCanvas(toggleButton, selectedIndex) {
 function initMenu() {
     var selectorCanvasArr = document.getElementsByClassName("animatedCanvas");
     for(let i = 0; i < selectorCanvasArr.length; i++){
-            selectorCanvasArr[i].height = 120;
-            selectorCanvasArr[i].width = 240;
+            selectorCanvasArr[i].height = 128;
+            selectorCanvasArr[i].width = 256;
             selectorCanvasArr[i].position = 'absolute';
-            let selector = new Selector(120, 1);
+            let selector = new Selector(128, 1);
             let context = selectorCanvasArr[i].getContext("2d");
 
             context.fillStyle = "red";
-            context.fillRect(0,0,120,120);
+            context.fillRect(0,0,128,128);
             context.fillStyle = "blue";
-            context.fillRect(120,0,120,120);
+            context.fillRect(128,0,128,128);
 
             //save the variables into the Menu object
             Menu.selectors[i] = selector;

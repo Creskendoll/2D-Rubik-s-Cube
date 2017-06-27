@@ -26,7 +26,7 @@ var Menu = {
             break;
 
             case 3:
-            sels[selectedIndex].xPos = 180;
+            sels[selectedIndex].xPos = 192;
             Menu.clear(selectedIndex);
             Menu.update(selectedIndex);
             break;
@@ -38,9 +38,9 @@ var Menu = {
 
         //draw grids
         contextArr[selectedIndex].fillStyle = "red";
-        contextArr[selectedIndex].fillRect(0,0,120,120);
+        contextArr[selectedIndex].fillRect(0,0,128,128);
         contextArr[selectedIndex].fillStyle = "blue";
-        contextArr[selectedIndex].fillRect(120,0,120,120);
+        contextArr[selectedIndex].fillRect(128,0,128,128);
 
         //draw selector
         contextArr[selectedIndex].fillStyle = sels[selectedIndex].color;

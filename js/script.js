@@ -342,14 +342,14 @@ function setSelectorSpeed(toggleButton, selectedIndex){
                 Menu.update(i);
             }
         }
-        Menu.selectors[selectedIndex].xPos = 180;
+        Menu.selectors[selectedIndex].xPos = 192;
         Menu.clear(selectedIndex);
         Menu.update(selectedIndex);
         clearInterval(menuSelectorMovement);
         let img = new Image();
         img.src = "../res/check.png";
         img.onload = function() {
-            toggleButton.getContext("2d").drawImage(img, 60,0,120,120);
+            toggleButton.getContext("2d").drawImage(img, 64,0,128,128);
         };
         selectorSpeed = Number(toggleButton.attributes["value"].value);
         toggleButton.attributes["selected"].value = "true";

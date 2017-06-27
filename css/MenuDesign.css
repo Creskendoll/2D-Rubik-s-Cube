@@ -66,8 +66,8 @@ body {
 
 div.animatedContainer {
 	cursor: pointer;
-	height: 120px;
-	width: 240px;
+	height: 128px;
+	width: 256px;
 	border: 1px solid black;
 }
 
@@ -126,7 +126,7 @@ div.diffOverlay {
 	text-align: center;
 }
 
-div.middleCanvas {
+.middleCanvas {
 	transition: .4s ease;
 	opacity: 0;
 	height: 32px;
@@ -136,12 +136,12 @@ div.middleCanvas {
 	margin-left:32px;margin-right:auto;margin-bottom: 48px;
 }
 
-div.insideText {
+.insideText {
 	color: black;
 	background-color: #4CAF50;
 	font-size: 30px;
 	font-family: Arial, Helvetica, sans-serif;
-	position: absolute;
+	position: fixed;
 }
 
 .sizeButtons img {
