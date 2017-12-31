@@ -72,28 +72,28 @@ function EventController() {
         }else{
             switch (event.key){
                 case "w":
-                if(!gridMovement){
+                if(!movement && !gridMovement){
                     gridMovement = setInterval(function(){
                         Rubics.moveSurface("Up");
                     },1);
                 }
-                    break;
+                break;
                 case "s":
-                if(!gridMovement){
+                if(!movement && !gridMovement){
                     gridMovement = setInterval(function(){
                         Rubics.moveSurface("Down");
                     },1);
                 }
-                    break;
+                break;
                 case "a":
-                if(!gridMovement){
+                if(!movement && !gridMovement){
                     gridMovement = setInterval(function(){
                         Rubics.moveSurface("Left");
                     },1);
                 }
                     break;
                 case "d":
-                if(!gridMovement){
+                if(!movement && !gridMovement){
                     gridMovement = setInterval(function(){
                         Rubics.moveSurface("Right");
                     },1);
@@ -176,7 +176,7 @@ function randomizeSurface() {
 }*/
 
 //surface grid movement functions, 0-up 1-down, 2-left, 3-right
-//animated and unanimated movaments are different so we seperate this with the 'animated' parameter
+//animated and unanimated movements are different so we seperate this with the 'animated' parameter
 var gridMovements = [
     function moveGridUp(animated){
         if(animated){

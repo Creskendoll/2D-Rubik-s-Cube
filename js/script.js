@@ -31,7 +31,7 @@ var gameMenu;
 var canvasSize = 600;
 var gameContext;
 function startGame() {
-    if(Menu.checkMenu() == true){
+    if(Menu.checkMenu()){
         document.getElementById("gameMan").style.display = 'none';
         gameMenu = document.getElementById("gameMenu");
         gameMenu.style.display = 'none';
@@ -73,8 +73,8 @@ function startGame() {
         let errSound = new Audio("../res/err.wav");
 
         if(!blinkInterval){
-            errSound.play();
             blinkInterval = setInterval(function(){ Menu.blink(divs, divObjects)}, 300);
+            errSound.play();
         }
     }
 }
@@ -111,10 +111,9 @@ var Rubics = {
         this.context.clearRect(0, 0, this.gameCanvas.width, this.gameCanvas.height);
     },
     update : function () {
-        var i, j;
         //draw surface
-        for (i = 0; i < gameSize; i++) {
-            for (j = 0; j < gameSize; j++) {
+        for (let i = 0; i < gameSize; i++) {
+            for (let j = 0; j < gameSize; j++) {
                 if(surface[i][j].yPos < 0){
                     //upmost
                     let height = Math.abs(surface[i][j].yPos);

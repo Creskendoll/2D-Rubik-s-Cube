@@ -110,15 +110,15 @@ var Menu = {
         Rubics.infoCanvas.style.display = 'inline';
     },
     showMenu : function(){
-        let bordersToBeChanged = document.getElementsByClassName("overlay");
+       // let bordersToBeChanged = document.getElementsByClassName("overlay");
 
         document.getElementById("startButton").innerHTML = "Restart";
 
         //TODO: update this when you find better pngs
         //bordersToBeChanged[0].style.border = "2px solid";
-        for(let i = 1; i < bordersToBeChanged.length; i++){
+        /*for(let i = 1; i < bordersToBeChanged.length; i++){
             bordersToBeChanged[i].style.border = "1px solid";
-        }
+        }*/
         document.getElementById("gameMan").style.display = this.helpShowing ? 'inline-block' : 'none';
         Rubics.gameCanvas.style.display = 'none';
         Rubics.infoCanvas.style.display = 'none';
@@ -160,7 +160,7 @@ var Menu = {
             if (vals[i].attributes["value"].value == gameSettings[0]) {
                 sizeOverlays[i].style.border = "3px solid blue";
             } else {
-                sizeOverlays[i].style.border = "initial";
+                sizeOverlays[i].style.border = "1px solid";
             }
         }
 
@@ -171,6 +171,5 @@ var Menu = {
                 difficultyOverlays[i].style.border = "initial";
             }
         }
-        
     }
 }
