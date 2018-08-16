@@ -9,7 +9,7 @@
     }
 	</script>
 
-	<link rel="stylesheet" type="text/css" href="../css/MenuDesign.css">
+	<link rel="stylesheet" type="text/css" href="./css/MenuDesign.css">
 </head>
 <body onload="hideBut(); initMenu();">
 	<table id="gameMenu">
@@ -18,25 +18,25 @@
 			<td>
 			<div class="sizeButtons">
 				<div class="sizeOverlay border">
-					<img src="../res/grid3.png" class="toggleButton" value="3" onclick="setGameSize(this)"/>
+					<img src="./res/grid3.png" class="toggleButton" value="3" onclick="setGameSize(this)"/>
 					<div class="middleCanvas" onclick="setGameSize(document.getElementsByClassName('toggleButton')[0])">
 						<div class="sizeText" id="three">3 X 3</div>
 					</div>
 				</div>
 				<div class="sizeOverlay">
-					<img src="../res/grid4.png" class="toggleButton" value="4" onclick="setGameSize(this)"/>
+					<img src="./res/grid4.png" class="toggleButton" value="4" onclick="setGameSize(this)"/>
 					<div class="middleCanvas" onclick="setGameSize(document.getElementsByClassName('toggleButton')[1])">
 						<div class="sizeText" id="four">4 X 4</div>
 					</div>
 				</div>
 				<div class="sizeOverlay">
-					<img src="../res/grid5.png" class="toggleButton" value="5" onclick="setGameSize(this)"/>
+					<img src="./res/grid5.png" class="toggleButton" value="5" onclick="setGameSize(this)"/>
 					<div class="middleCanvas" onclick="setGameSize(document.getElementsByClassName('toggleButton')[2])">
 						<div class="sizeText" id="five">5 X 5</div>
 					</div>
 				</div>
 				<div class="sizeOverlay">
-					<img src="../res/grid6.png" class="toggleButton" value="6" onclick="setGameSize(this)"/>
+					<img src="./res/grid6.png" class="toggleButton" value="6" onclick="setGameSize(this)"/>
 					<div class="middleCanvas" onclick="setGameSize(document.getElementsByClassName('toggleButton')[3])">
 						<div class="sizeText" id="six">6 X 6</div>
 					</div>
@@ -75,25 +75,25 @@
 				<!-- changed  difficultyText to insideText, added middleCanvas-->
 			<div class="difficultyButtons">
 				<div class="diffOverlay first">
-					<img src="../res/smileyEasy.png" class="toggleButton" value="Easy" onclick="setDifficulty(this)"/>
+					<img src="./res/smileyEasy.png" class="toggleButton" value="Easy" onclick="setDifficulty(this)"/>
 					<div class="middleCanvas" onclick="setDifficulty(document.getElementsByClassName('toggleButton')[4])">
 						<div class="insideText">Easy</div>
 					</div>
 				</div>
 				<div class="diffOverlay">
-					<img src="../res/smileyMedium.png" class="toggleButton" melda="koala" value="Medium" onclick="setDifficulty(this)"/>
+					<img src="./res/smileyMedium.png" class="toggleButton" melda="koala" value="Medium" onclick="setDifficulty(this)"/>
 					<div class="middleCanvas" onclick="setDifficulty(document.getElementsByClassName('toggleButton')[5])">
 						<div class="insideText">Medium</div>
 					</div>
 				</div>
 				<div class="diffOverlay">
-					<img src="../res/smileyHard.png" class="toggleButton" value="Hard" onclick="setDifficulty(this)"/>
+					<img src="./res/smileyHard.png" class="toggleButton" value="Hard" onclick="setDifficulty(this)"/>
 					<div class="middleCanvas" onclick="setDifficulty(document.getElementsByClassName('toggleButton')[6])">
 						<div class="insideText">Hard</div>
 					</div>
 				</div>
 				<div class="diffOverlay">
-					<img src="../res/smileyExpert.png" class="toggleButton" value="Expert" onclick="setDifficulty(this)"/>
+					<img src="./res/smileyExpert.png" class="toggleButton" value="Expert" onclick="setDifficulty(this)"/>
 					<div class="middleCanvas" onclick="setDifficulty(document.getElementsByClassName('toggleButton')[7])">
 						<div class="insideText">Expert</div>
 					</div>
@@ -119,11 +119,11 @@
 			<h3>Use the arrow keys to navigate around the board and "WASD" keys to move the row and columns.</h3>
 			<h3>Hit 'r' to save your board and try to make it. Use "ESC" to return to this menu.</h3>
 		</div>
-	<script type="text/javascript" src="../js/MenuController.js"></script>
-    <script type="text/javascript" src="../js/InfoCanvas.js"></script>
-    <script type="text/javascript" src="../js/script.js"></script>
-	<script type="text/javascript" src="../js/EventController.js"></script>
-	<script type="text/javascript" src="../js/Selector.js"></script>
-	<script type="text/javascript" src="../js/UiControls.js"></script>
+	<script type="text/javascript" src="./js/MenuController.js"></script>
+    <script type="text/javascript" src="./js/InfoCanvas.js"></script>
+    <script type="text/javascript" src="./js/script.js"></script>
+	<script type="text/javascript" src="./js/EventController.js"></script>
+	<script type="text/javascript" src="./js/Selector.js"></script>
+	<script type="text/javascript" src="./js/UiControls.js"></script>
 </body>
 </html>

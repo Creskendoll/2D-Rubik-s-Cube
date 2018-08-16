@@ -70,7 +70,7 @@ function startGame() {
     }else {
         let divs = Menu.checkMenu();
         let divObjects = document.getElementsByClassName("blinkingDiv");
-        let errSound = new Audio("../res/err.wav");
+        let errSound = new Audio("./res/err.wav");
 
         if(!blinkInterval){
             blinkInterval = setInterval(function(){ Menu.blink(divs, divObjects)}, 300);
@@ -316,12 +316,12 @@ function setGameSize(toggleButton){
     //TODO:fix this, it's not solid
     for(let i = 0; i < 4; i++){
         if(buttons[i] !== toggleButton){
-            buttons[i].src = "../res/grid" + buttons[i].attributes["value"].value + ".png"
-        }else if(toggleButton.src == "file:///home/ken/Documents/javascript/Rubics/res/check.png"){
-            toggleButton.src = "../res/grid" + val + ".png";
+            buttons[i].src = "./res/grid" + buttons[i].attributes["value"].value + ".png"
+        }else if(toggleButton.src == "./res/check.png"){
+            toggleButton.src = "./res/grid" + val + ".png";
             gameSize = null;
         }else{
-            toggleButton.src = "../res/check.png";
+            toggleButton.src = "./res/check.png";
             gameSize = val;
         }
     }
@@ -346,7 +346,7 @@ function setSelectorSpeed(toggleButton, selectedIndex){
         Menu.update(selectedIndex);
         clearInterval(menuSelectorMovement);
         let img = new Image();
-        img.src = "../res/check.png";
+        img.src = "./res/check.png";
         img.onload = function() {
             toggleButton.getContext("2d").drawImage(img, 64,0,128,128);
         };
@@ -369,52 +369,15 @@ function setDifficulty(toggleButton){
     //TODO:fix this, it's not solid
     for(let i = 4; i < diffButtons.length; i++){
         if(diffButtons[i] !== toggleButton){
-            diffButtons[i].src = "../res/smiley" + diffButtons[i].attributes["value"].value + ".png"
-        }else if(toggleButton.src == "file:///home/ken/Documents/javascript/Rubics/res/check.png"){
-            toggleButton.src = "../res/smiley" + dif + ".png";
+            diffButtons[i].src = "./res/smiley" + diffButtons[i].attributes["value"].value + ".png"
+        }else if(toggleButton.src == "./res/check.png"){
+            toggleButton.src = "./res/smiley" + dif + ".png";
             difficulty = null;
         }else{
             difficulty = dif;
-            toggleButton.src = "../res/check.png";
+            toggleButton.src = "./res/check.png";
         }
     }
        // Menu.checkMenu();
         Menu.checkDiff(gameSize, difficulty);
 }
-
-
-/*var Woman = {
-    getAngry : function(person){
-        if(person === boyfriend){
-            angerLevel += 100;
-        }
-        for(let i = 0; i < angerLevel; i++){
-            alert("I hate you");
-            alert("This can't go on.");
-        }
-    },
-    love : function(person){
-        loveLevel += 50;
-        if(person === child){
-            loveLevel += 100;
-        }
-        let img = document.getElementById("img");
-        img.size = loveLevel;
-        img.src = "../res/heart.png"
-    },
-    getHungry : function(mood){
-        eatFood(10);
-        if(mood == "sad" || mood == "onWeek"){
-          eatFood(800);  
-          console.log("Gimme some of yours.");
-        }
-    },
-    care : function(){
-        while(Man.isActingStupid()){
-            alert("Be carefull");
-            if(Man.isInjured()){
-                console.log("Told ya");
-            }
-        }
-    }
-}*/
